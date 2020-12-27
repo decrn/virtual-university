@@ -1,5 +1,7 @@
 # Virtual University
 
+Relevant artifacts can be found in the `data/` directory.
+
 ## Contents
 
 This repository contains all artifacts for the virtual university OIS project, including source code, a test database, generated RDF tuples, etc and a copy of the original report.
