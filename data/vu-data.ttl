@@ -1,0 +1,745 @@
+<http://onto.virtual-university.org#polloption_5>
+        a       <http://onto.virtual-university.org#PollOption> ;
+        <http://onto.virtual-university.org#pollOptionFor>
+                <http://onto.virtual-university.org#BigBlueButtonPoll_2> ;
+        <http://onto.virtual-university.org#pollOptionText>
+                "Yes" .
+
+<http://onto.virtual-university.org#class_2>
+        a       <http://onto.virtual-university.org#Lecture> ;
+        <http://onto.virtual-university.org#classEndDate>
+                "2020-10-10T12:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classId>
+                "2"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#classStartDate>
+                "2020-10-10T10:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classSubject>
+                "Description Logics" ;
+        <http://onto.virtual-university.org#classTaughtBy>
+                <http://onto.virtual-university.org#person_bartbogaerts> ;
+        <http://onto.virtual-university.org#numberOfStudents>
+                "5"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#partOfCourse>
+                <http://onto.virtual-university.org#course_4014887FNR> .
+
+<http://onto.virtual-university.org#person_youneszeboudj>
+        a       <http://onto.virtual-university.org#TeachingAssistent> ;
+        <http://onto.virtual-university.org#employeeId>
+                "2" ;
+        <http://onto.virtual-university.org#teachesCourse>
+                <http://onto.virtual-university.org#course_4014887FNR> ;
+        <http://xmlns.com/foaf/0.1/familyName>
+                "Zeboudj" ;
+        <http://xmlns.com/foaf/0.1/firstName>
+                "Younes" ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                "younes.zeboudj@virtualuniversity.be" ;
+        <http://xmlns.com/foaf/0.1/nick>
+                "youneszeboudj" .
+
+<http://onto.virtual-university.org#coursematerial_1>
+        a       <http://onto.virtual-university.org#Book> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_1> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-09-16T10:20:05.123"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-09-16T10:20:05.123"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4014887FNR> .
+
+<http://onto.virtual-university.org#course_4014887FNR>
+        a       <http://onto.virtual-university.org#Course> ;
+        <http://onto.virtual-university.org#courseCode>
+                "4014887FNR" ;
+        <http://onto.virtual-university.org#courseCredits>
+                "6"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#courseGrading>
+                "https://caliweb.cumulus.vub.ac.be/?page=course-offer&id=005033&anchor=1&target=pr&year=2021&language=nl&output=html" ;
+        <http://onto.virtual-university.org#courseName>
+                "Open Information Systems" .
+
+<http://onto.virtual-university.org#course_4016441ENR>
+        a       <http://onto.virtual-university.org#Course> ;
+        <http://onto.virtual-university.org#courseCode>
+                "4016441ENR" ;
+        <http://onto.virtual-university.org#courseCredits>
+                "3"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#courseGrading>
+                "https://caliweb.cumulus.vub.ac.be/?page=course-offer&id=007041&anchor=1&target=pr&year=2021&language=nl&output=html" ;
+        <http://onto.virtual-university.org#courseName>
+                "Image and Video Technology" .
+
+<http://onto.virtual-university.org#coursematerialfile_11>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/files/579563/download?download_frd=1" .
+
+<http://onto.virtual-university.org#Recording_2>
+        a       <http://onto.virtual-university.org#Recording> ;
+        <http://onto.virtual-university.org#:recordingLength>
+                "01:54:43" ;
+        <http://onto.virtual-university.org#recordingForClassroom>
+                <http://onto.virtual-university.org#classroom_6> ;
+        <http://onto.virtual-university.org#recordingLocation>
+                "http://youtube.com/exampleurl02" .
+
+<http://onto.virtual-university.org#coursematerialfile_8>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/files/589883/download?download_frd=1" .
+
+<http://onto.virtual-university.org#person_gwijgrenie>
+        a       <http://onto.virtual-university.org#Student> ;
+        <http://onto.virtual-university.org#assignedToBreakoutRoom>
+                <http://onto.virtual-university.org#breakoutroom_4> , <http://onto.virtual-university.org#breakoutroom_1> ;
+        <http://onto.virtual-university.org#attendsClass>
+                <http://onto.virtual-university.org#class_4> , <http://onto.virtual-university.org#class_3> , <http://onto.virtual-university.org#class_5> , <http://onto.virtual-university.org#class_2> , <http://onto.virtual-university.org#class_1> ;
+        <http://onto.virtual-university.org#choosesPollOption>
+                <http://onto.virtual-university.org#polloption_5> , <http://onto.virtual-university.org#polloption_1> ;
+        <http://onto.virtual-university.org#studentNumber>
+                "0565692" ;
+        <http://xmlns.com/foaf/0.1/familyName>
+                "Grenié" ;
+        <http://xmlns.com/foaf/0.1/firstName>
+                "Gwij" ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                "gwij.grenie@virtualuniversity.be" ;
+        <http://xmlns.com/foaf/0.1/nick>
+                "gwijgrenie" .
+
+<http://onto.virtual-university.org#BigBlueButtonPoll_2>
+        a       <http://onto.virtual-university.org#Poll> ;
+        <http://onto.virtual-university.org#pollFor>
+                <http://onto.virtual-university.org#classroom_5> ;
+        <http://onto.virtual-university.org#pollQuestion>
+                "Do you want a break?" .
+
+<http://onto.virtual-university.org#coursematerialfile_2>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/courses/19277/files/564304?module_item_id=99457" .
+
+<http://onto.virtual-university.org#coursematerial_6>
+        a       <http://onto.virtual-university.org#CodeExample> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_6> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-10-01T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-10-01T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4013056FNR> .
+
+<http://onto.virtual-university.org#colorcode_yellow>
+        a       <http://onto.virtual-university.org#ColorCode> ;
+        <http://onto.virtual-university.org#color>
+                "yellow" ;
+        <http://onto.virtual-university.org#occupancyChange>
+                "0.5"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://onto.virtual-university.org#restrictions>
+                "A mask is obligated in class." .
+
+<http://onto.virtual-university.org#classroom_1>
+        a       <http://onto.virtual-university.org#ZoomMeeting> ;
+        <http://onto.virtual-university.org#bitrate>
+                "10 MB/s" ;
+        <http://onto.virtual-university.org#classroomUsedFor>
+                <http://onto.virtual-university.org#class_1> ;
+        <http://onto.virtual-university.org#encoder>
+                "x265" ;
+        <http://onto.virtual-university.org#meetingId>
+                "234-3256432-26" ;
+        <http://onto.virtual-university.org#resolution>
+                "1080x720" ;
+        <http://onto.virtual-university.org#sessionUrl>
+                "htttp://zoom.com/exampleur102" .
+
+<http://onto.virtual-university.org#polloption_4>
+        a       <http://onto.virtual-university.org#PollOption> ;
+        <http://onto.virtual-university.org#pollOptionFor>
+                <http://onto.virtual-university.org#BigBlueButtonPoll_1> ;
+        <http://onto.virtual-university.org#pollOptionText>
+                "Exercise 4" .
+
+<http://onto.virtual-university.org#class_1>
+        a       <http://onto.virtual-university.org#Lecture> ;
+        <http://onto.virtual-university.org#classEndDate>
+                "2020-09-30T12:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classHasRecording>
+                <http://onto.virtual-university.org#Recording_2> ;
+        <http://onto.virtual-university.org#classId>
+                "1"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#classStartDate>
+                "2020-09-30T10:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classSubject>
+                "RDF/RDFS" ;
+        <http://onto.virtual-university.org#classTaughtBy>
+                <http://onto.virtual-university.org#person_basketsman> ;
+        <http://onto.virtual-university.org#numberOfStudents>
+                "1"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#partOfCourse>
+                <http://onto.virtual-university.org#course_4014887FNR> ;
+        <http://onto.virtual-university.org#usesMaterial>
+                <http://onto.virtual-university.org#coursematerial_5> , <http://onto.virtual-university.org#coursematerial_3> .
+
+<http://onto.virtual-university.org#bookmark_1>
+        a       <http://onto.virtual-university.org#Bookmark> ;
+        <http://onto.virtual-university.org#bookmarkFor>
+                <http://onto.virtual-university.org#classroom_3> ;
+        <http://onto.virtual-university.org#bookmarkText>
+                "start lecture" ;
+        <http://onto.virtual-university.org#bookmarkTimeStamp>
+                "00:01:00.000" .
+
+<http://onto.virtual-university.org#coursematerialfile_10>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/files/558373/download?download_frd=1" .
+
+<http://onto.virtual-university.org#Recording_1>
+        a       <http://onto.virtual-university.org#Recording> ;
+        <http://onto.virtual-university.org#:recordingLength>
+                "02:16:43" ;
+        <http://onto.virtual-university.org#recordingForClassroom>
+                <http://onto.virtual-university.org#classroom_2> ;
+        <http://onto.virtual-university.org#recordingLocation>
+                "http://youtube.com/exampleurl01" .
+
+<http://onto.virtual-university.org#person_maximvandewynckel>
+        a       <http://onto.virtual-university.org#TeachingAssistent> ;
+        <http://onto.virtual-university.org#assignedToBreakoutRoom>
+                <http://onto.virtual-university.org#breakoutroom_2> , <http://onto.virtual-university.org#breakoutroom_4> ;
+        <http://onto.virtual-university.org#employeeId>
+                "1" ;
+        <http://onto.virtual-university.org#teachesCourse>
+                <http://onto.virtual-university.org#course_4016441ENR> ;
+        <http://xmlns.com/foaf/0.1/familyName>
+                "Van de Wynckel" ;
+        <http://xmlns.com/foaf/0.1/firstName>
+                "Maxim" ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                "maxim.vandewynckel@virtualuniversity.be" ;
+        <http://xmlns.com/foaf/0.1/nick>
+                "maximvandewynckel" .
+
+<http://onto.virtual-university.org#coursematerialfile_7>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/files/580072/download?download_frd=1" .
+
+<http://onto.virtual-university.org#person_robrechtblancquaert>
+        a       <http://onto.virtual-university.org#Student> ;
+        <http://onto.virtual-university.org#assignedToBreakoutRoom>
+                <http://onto.virtual-university.org#breakoutroom_2> , <http://onto.virtual-university.org#breakoutroom_4> ;
+        <http://onto.virtual-university.org#attendsClass>
+                <http://onto.virtual-university.org#class_2> , <http://onto.virtual-university.org#class_5> ;
+        <http://onto.virtual-university.org#choosesPollOption>
+                <http://onto.virtual-university.org#polloption_2> , <http://onto.virtual-university.org#polloption_6> ;
+        <http://onto.virtual-university.org#studentNumber>
+                "0565693" ;
+        <http://xmlns.com/foaf/0.1/familyName>
+                "Blancquaert" ;
+        <http://xmlns.com/foaf/0.1/firstName>
+                "Robrecht" ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                "robrecht.blancquaert@virtualuniversity.be" ;
+        <http://xmlns.com/foaf/0.1/nick>
+                "robrechtblancquaert" .
+
+<http://onto.virtual-university.org#breakoutroom_5>
+        a       <http://onto.virtual-university.org#BreakoutRoom> ;
+        <http://onto.virtual-university.org#breakoutRoomFor>
+                <http://onto.virtual-university.org#classroom_5> .
+
+<http://onto.virtual-university.org#person_willemwillems>
+        a       <http://onto.virtual-university.org#Professor> ;
+        <http://onto.virtual-university.org#employeeId>
+                "6" ;
+        <http://xmlns.com/foaf/0.1/familyName>
+                "Willems" ;
+        <http://xmlns.com/foaf/0.1/firstName>
+                "Willem" ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                "Willem.Willems@virtualuniversity.be" ;
+        <http://xmlns.com/foaf/0.1/nick>
+                "willemwillems" .
+
+<http://onto.virtual-university.org#classroom_6>
+        a       <http://onto.virtual-university.org#PhysicalClassroom> ;
+        <http://onto.virtual-university.org#classroomUsedFor>
+                <http://onto.virtual-university.org#class_1> ;
+        <http://onto.virtual-university.org#location>
+                "Gebouw E, gelijksvloers" ;
+        <http://onto.virtual-university.org#numberOfAllowedSeats>
+                "12"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#numberOfSeats>
+                "64"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#roomCode>
+                "E.007" ;
+        <http://onto.virtual-university.org#subjectToColorCode>
+                <http://onto.virtual-university.org#colorcode_red> .
+
+<http://onto.virtual-university.org#BigBlueButtonPoll_1>
+        a       <http://onto.virtual-university.org#Poll> ;
+        <http://onto.virtual-university.org#pollFor>
+                <http://onto.virtual-university.org#classroom_5> ;
+        <http://onto.virtual-university.org#pollQuestion>
+                "What exercise are you on?" .
+
+<http://onto.virtual-university.org#person_basketsman>
+        a       <http://onto.virtual-university.org#Professor> ;
+        <http://onto.virtual-university.org#assignedToBreakoutRoom>
+                <http://onto.virtual-university.org#breakoutroom_4> ;
+        <http://onto.virtual-university.org#employeeId>
+                "4" ;
+        <http://onto.virtual-university.org#teachesCourse>
+                <http://onto.virtual-university.org#course_4014887FNR> ;
+        <http://xmlns.com/foaf/0.1/familyName>
+                "Ketsman" ;
+        <http://xmlns.com/foaf/0.1/firstName>
+                "Bas" ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                "Bas.Ketsman@virtualuniversity.be" ;
+        <http://xmlns.com/foaf/0.1/nick>
+                "basketsman" .
+
+<http://onto.virtual-university.org#coursematerialfile_1>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/courses/19277/files/545504?module_item_id=99452" .
+
+<http://onto.virtual-university.org#class_6>
+        a       <http://onto.virtual-university.org#Lecture> ;
+        <http://onto.virtual-university.org#classEndDate>
+                "2020-12-02T12:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classId>
+                "6"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#classStartDate>
+                "2020-12-02T10:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classSubject>
+                "Semantic Web" ;
+        <http://onto.virtual-university.org#classTaughtBy>
+                <http://onto.virtual-university.org#person_janjanssens> ;
+        <http://onto.virtual-university.org#partOfCourse>
+                <http://onto.virtual-university.org#course_4014887FNR> .
+
+<http://onto.virtual-university.org#annotation_1>
+        a       <http://onto.virtual-university.org#Annotation> ;
+        <http://onto.virtual-university.org#annotationCreatedBy>
+                <http://onto.virtual-university.org#person_deniscarnier> ;
+        <http://onto.virtual-university.org#annotationText>
+                "Test timestamp" ;
+        <http://onto.virtual-university.org#annotationTimestamp>
+                "00:04:00.000" ;
+        <http://onto.virtual-university.org#appliesToPanoptoRecording>
+                <http://onto.virtual-university.org#classroom_3> .
+
+<http://onto.virtual-university.org#coursematerial_5>
+        a       <http://onto.virtual-university.org#CodeExample> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_5> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-09-16T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-09-16T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4014887FNR> .
+
+<http://onto.virtual-university.org#person_dietervandesande>
+        a       <http://onto.virtual-university.org#Student> ;
+        <http://onto.virtual-university.org#assignedToBreakoutRoom>
+                <http://onto.virtual-university.org#breakoutroom_4> , <http://onto.virtual-university.org#breakoutroom_2> ;
+        <http://onto.virtual-university.org#attendsClass>
+                <http://onto.virtual-university.org#class_5> , <http://onto.virtual-university.org#class_2> ;
+        <http://onto.virtual-university.org#choosesPollOption>
+                <http://onto.virtual-university.org#polloption_4> ;
+        <http://onto.virtual-university.org#studentNumber>
+                "0565694" ;
+        <http://onto.virtual-university.org#takesCourse>
+                <http://onto.virtual-university.org#course_4016441ENR> ;
+        <http://xmlns.com/foaf/0.1/familyName>
+                "Vandesande" ;
+        <http://xmlns.com/foaf/0.1/firstName>
+                "Dieter" ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                "dieter.vandesande@virtualuniversity.be" ;
+        <http://xmlns.com/foaf/0.1/nick>
+                "dietervandesande" .
+
+<http://onto.virtual-university.org#polloption_3>
+        a       <http://onto.virtual-university.org#PollOption> ;
+        <http://onto.virtual-university.org#pollOptionFor>
+                <http://onto.virtual-university.org#BigBlueButtonPoll_1> ;
+        <http://onto.virtual-university.org#pollOptionText>
+                "Exercise 3" .
+
+<http://onto.virtual-university.org#coursematerialfile_6>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/files/569076/download?download_frd=1" .
+
+<http://onto.virtual-university.org#breakoutroom_4>
+        a       <http://onto.virtual-university.org#BreakoutRoom> ;
+        <http://onto.virtual-university.org#breakoutRoomFor>
+                <http://onto.virtual-university.org#classroom_5> .
+
+<http://onto.virtual-university.org#classroom_5>
+        a       <http://onto.virtual-university.org#BigBlueButtonConference> ;
+        <http://onto.virtual-university.org#bitrate>
+                "12 MB/s" ;
+        <http://onto.virtual-university.org#chatHistory>
+                "Gwij says: Goodmorning. Robrecht says: Goodmorning!" ;
+        <http://onto.virtual-university.org#classroomUsedFor>
+                <http://onto.virtual-university.org#class_5> ;
+        <http://onto.virtual-university.org#encoder>
+                "x264" ;
+        <http://onto.virtual-university.org#resolution>
+                "1080x720" .
+
+<http://onto.virtual-university.org#class_5>
+        a       <http://onto.virtual-university.org#LabSession> ;
+        <http://onto.virtual-university.org#classEndDate>
+                "2020-11-10T17:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classHasRecording>
+                <http://onto.virtual-university.org#Recording_1> ;
+        <http://onto.virtual-university.org#classId>
+                "5"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#classStartDate>
+                "2020-11-10T15:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classSubject>
+                "Entropy encoding" ;
+        <http://onto.virtual-university.org#classTaughtBy>
+                <http://onto.virtual-university.org#person_maximvandewynckel> ;
+        <http://onto.virtual-university.org#numberOfStudents>
+                "4"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#partOfCourse>
+                <http://onto.virtual-university.org#course_4016441ENR> .
+
+<http://onto.virtual-university.org#coursematerial_4>
+        a       <http://onto.virtual-university.org#Handouts> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_4> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-09-16T16:43:51.246"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-09-25T12:55:51.246"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4014887FNR> .
+
+<http://onto.virtual-university.org#polloption_2>
+        a       <http://onto.virtual-university.org#PollOption> ;
+        <http://onto.virtual-university.org#pollOptionFor>
+                <http://onto.virtual-university.org#BigBlueButtonPoll_1> ;
+        <http://onto.virtual-university.org#pollOptionText>
+                "Exercise 2" .
+
+<http://onto.virtual-university.org#coursematerialfile_5>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/courses/19277/files/606913?module_item_id=99451" .
+
+<http://onto.virtual-university.org#coursematerial_9>
+        a       <http://onto.virtual-university.org#CodeExample> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_9> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-10-22T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-10-22T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4016441ENR> .
+
+<http://onto.virtual-university.org#breakoutroom_3>
+        a       <http://onto.virtual-university.org#BreakoutRoom> ;
+        <http://onto.virtual-university.org#breakoutRoomFor>
+                <http://onto.virtual-university.org#classroom_5> .
+
+<http://onto.virtual-university.org#classroom_4>
+        a       <http://onto.virtual-university.org#MicrosoftTeamsMeeting> ;
+        <http://onto.virtual-university.org#bitrate>
+                "9 MB/s" ;
+        <http://onto.virtual-university.org#chatHistory>
+                "Dieter says: Hello! Denis says: Hi there!" ;
+        <http://onto.virtual-university.org#classroomUsedFor>
+                <http://onto.virtual-university.org#class_4> ;
+        <http://onto.virtual-university.org#encoder>
+                "x264" ;
+        <http://onto.virtual-university.org#resolution>
+                "1080x720" ;
+        <http://onto.virtual-university.org#sessionUrl>
+                "http://teams.com/exampleurl" .
+
+<http://onto.virtual-university.org#class_4>
+        a       <http://onto.virtual-university.org#LabSession> ;
+        <http://onto.virtual-university.org#classEndDate>
+                "2020-11-10T17:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classId>
+                "4"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#classStartDate>
+                "2020-11-10T15:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classSubject>
+                "Description Logics" ;
+        <http://onto.virtual-university.org#classTaughtBy>
+                <http://onto.virtual-university.org#person_youneszeboudj> ;
+        <http://onto.virtual-university.org#numberOfStudents>
+                "1"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#partOfCourse>
+                <http://onto.virtual-university.org#course_4014887FNR> ;
+        <http://onto.virtual-university.org#usesMaterial>
+                <http://onto.virtual-university.org#coursematerial_5> .
+
+<http://onto.virtual-university.org#coursematerial_3>
+        a       <http://onto.virtual-university.org#Book> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_3> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-10-01T17:51:51.246"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-10-01T17:51:51.246"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4014887FNR> .
+
+<http://onto.virtual-university.org#polloption_1>
+        a       <http://onto.virtual-university.org#PollOption> ;
+        <http://onto.virtual-university.org#pollOptionFor>
+                <http://onto.virtual-university.org#BigBlueButtonPoll_1> ;
+        <http://onto.virtual-university.org#pollOptionText>
+                "Exercise 1" .
+
+<http://onto.virtual-university.org#coursematerial_11>
+        a       <http://onto.virtual-university.org#CodeExample> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_11> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-11-04T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-11-04T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4016441ENR> .
+
+<http://onto.virtual-university.org#person_bartbogaerts>
+        a       <http://onto.virtual-university.org#Professor> ;
+        <http://onto.virtual-university.org#assignedToBreakoutRoom>
+                <http://onto.virtual-university.org#breakoutroom_4> ;
+        <http://onto.virtual-university.org#employeeId>
+                "3" ;
+        <http://onto.virtual-university.org#teachesCourse>
+                <http://onto.virtual-university.org#course_4016441ENR> , <http://onto.virtual-university.org#course_4014887FNR> ;
+        <http://xmlns.com/foaf/0.1/familyName>
+                "Bogaerts" ;
+        <http://xmlns.com/foaf/0.1/firstName>
+                "Bart" ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                "Bart.Bogaerts@virtualuniversity.be" ;
+        <http://xmlns.com/foaf/0.1/nick>
+                "bartbogaerts" .
+
+<http://onto.virtual-university.org#coursematerialfile_4>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/courses/19277/files/559249?module_item_id=96569" .
+
+<http://onto.virtual-university.org#coursematerial_8>
+        a       <http://onto.virtual-university.org#CodeExample> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_8> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-10-15T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-10-15T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4013056FNR> .
+
+<http://onto.virtual-university.org#breakoutroom_2>
+        a       <http://onto.virtual-university.org#BreakoutRoom> ;
+        <http://onto.virtual-university.org#breakoutRoomFor>
+                <http://onto.virtual-university.org#classroom_5> .
+
+<http://onto.virtual-university.org#colorcode_red>
+        a       <http://onto.virtual-university.org#ColorCode> ;
+        <http://onto.virtual-university.org#color>
+                "red" ;
+        <http://onto.virtual-university.org#occupancyChange>
+                "0.2"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://onto.virtual-university.org#restrictions>
+                "A mask is obligated on the whole campus." .
+
+<http://onto.virtual-university.org#classroom_3>
+        a       <http://onto.virtual-university.org#PanoptoRecording> ;
+        <http://onto.virtual-university.org#bitrate>
+                "7 MB/s" ;
+        <http://onto.virtual-university.org#classroomUsedFor>
+                <http://onto.virtual-university.org#class_3> ;
+        <http://onto.virtual-university.org#encoder>
+                "x264" ;
+        <http://onto.virtual-university.org#notes>
+                "Deze recording heeft geen notes" ;
+        <http://onto.virtual-university.org#resolution>
+                "1920x1080" ;
+        <http://onto.virtual-university.org#sessionUrl>
+                "https://vub.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=575fea71-91e1-4335-8ee8-ac9300ab0c7d" .
+
+<http://onto.virtual-university.org#polloption_6>
+        a       <http://onto.virtual-university.org#PollOption> ;
+        <http://onto.virtual-university.org#pollOptionFor>
+                <http://onto.virtual-university.org#BigBlueButtonPoll_2> ;
+        <http://onto.virtual-university.org#pollOptionText>
+                "No" .
+
+<http://onto.virtual-university.org#person_deniscarnier>
+        a       <http://onto.virtual-university.org#Student> ;
+        <http://onto.virtual-university.org#assignedToBreakoutRoom>
+                <http://onto.virtual-university.org#breakoutroom_4> , <http://onto.virtual-university.org#breakoutroom_1> ;
+        <http://onto.virtual-university.org#attendsClass>
+                <http://onto.virtual-university.org#class_2> , <http://onto.virtual-university.org#class_5> ;
+        <http://onto.virtual-university.org#choosesPollOption>
+                <http://onto.virtual-university.org#polloption_1> , <http://onto.virtual-university.org#polloption_5> ;
+        <http://onto.virtual-university.org#studentNumber>
+                "0565691" ;
+        <http://xmlns.com/foaf/0.1/familyName>
+                "Carnier" ;
+        <http://xmlns.com/foaf/0.1/firstName>
+                "Denis" ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                "denis.carnier@virtualuniversity.be" ;
+        <http://xmlns.com/foaf/0.1/nick>
+                "deniscarnier" .
+
+<http://onto.virtual-university.org#class_3>
+        a       <http://onto.virtual-university.org#QnASession> ;
+        <http://onto.virtual-university.org#classEndDate>
+                "2020-10-13T12:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classId>
+                "3"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#classStartDate>
+                "2020-10-13T10:00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#classSubject>
+                "Description Logics" ;
+        <http://onto.virtual-university.org#classTaughtBy>
+                <http://onto.virtual-university.org#person_bartbogaerts> ;
+        <http://onto.virtual-university.org#numberOfStudents>
+                "1"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#partOfCourse>
+                <http://onto.virtual-university.org#course_4016441ENR> ;
+        <http://onto.virtual-university.org#usesMaterial>
+                <http://onto.virtual-university.org#coursematerial_11> .
+
+<http://onto.virtual-university.org#coursematerial_2>
+        a       <http://onto.virtual-university.org#Book> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_2> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-09-23T11:14:01.043"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-09-23T11:14:01.043"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4014887FNR> .
+
+<http://onto.virtual-university.org#coursematerial_10>
+        a       <http://onto.virtual-university.org#CodeExample> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_10> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-10-29T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-10-29T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4016441ENR> .
+
+<http://onto.virtual-university.org#coursematerialfile_9>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/files/556561/download?download_frd=1" .
+
+<http://onto.virtual-university.org#course_4013056FNR>
+        a       <http://onto.virtual-university.org#Course> ;
+        <http://onto.virtual-university.org#courseCode>
+                "4013056FNR" ;
+        <http://onto.virtual-university.org#courseCredits>
+                "6"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://onto.virtual-university.org#courseGrading>
+                "https://caliweb.cumulus.vub.ac.be/?page=course-offer&id=010169&anchor=2&target=pr&year=2021&language=nl&output=html" ;
+        <http://onto.virtual-university.org#courseName>
+                "Functional Programming" .
+
+<http://onto.virtual-university.org#person_janjanssens>
+        <http://onto.virtual-university.org#employeeId>
+                "5_ex" ;
+        <http://onto.virtual-university.org#teachesCourse>
+                <http://onto.virtual-university.org#course_4014887FNR> ;
+        <http://xmlns.com/foaf/0.1/familyName>
+                "Janssens" ;
+        <http://xmlns.com/foaf/0.1/firstName>
+                "Jan" ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                "Jan.Janssens@external-university.be" ;
+        <http://xmlns.com/foaf/0.1/nick>
+                "janjanssens" .
+
+<http://onto.virtual-university.org#colorcode_green>
+        a       <http://onto.virtual-university.org#ColorCode> ;
+        <http://onto.virtual-university.org#color>
+                "green" ;
+        <http://onto.virtual-university.org#occupancyChange>
+                "1.0"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://onto.virtual-university.org#restrictions>
+                "Everything is possible." .
+
+<http://onto.virtual-university.org#coursematerialfile_3>
+        a       <http://dbpedia.org/ontology/file> ;
+        <http://dbpedia.org/ontology/fileExtension>
+                ".pdf" ;
+        <http://dbpedia.org/ontology/fileURL>
+                "https://canvas.vub.be/courses/19277/files/597928?module_item_id=109612" .
+
+<http://onto.virtual-university.org#coursematerial_7>
+        a       <http://onto.virtual-university.org#CodeExample> ;
+        <http://onto.virtual-university.org#containsWork>
+                <http://onto.virtual-university.org#coursematerialfile_7> ;
+        <http://onto.virtual-university.org#dateAdded>
+                "2020-10-08T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#dateModified>
+                "2020-11-09T16:45:16.439"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://onto.virtual-university.org#materialFor>
+                <http://onto.virtual-university.org#course_4013056FNR> .
+
+<http://onto.virtual-university.org#breakoutroom_1>
+        a       <http://onto.virtual-university.org#BreakoutRoom> ;
+        <http://onto.virtual-university.org#breakoutRoomFor>
+                <http://onto.virtual-university.org#classroom_5> .
+
+<http://onto.virtual-university.org#classroom_2>
+        a       <http://onto.virtual-university.org#ZoomMeeting> ;
+        <http://onto.virtual-university.org#bitrate>
+                "12 MB/s" ;
+        <http://onto.virtual-university.org#classroomUsedFor>
+                <http://onto.virtual-university.org#class_2> ;
+        <http://onto.virtual-university.org#encoder>
+                "x264" ;
+        <http://onto.virtual-university.org#meetingId>
+                "439-4005054-11" ;
+        <http://onto.virtual-university.org#resolution>
+                "1080x720" ;
+        <http://onto.virtual-university.org#sessionUrl>
+                "htttp://zoom.com/exampleur101" .

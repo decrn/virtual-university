@@ -1,0 +1,1472 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://onto.virtual-university.org#"
+     xml:base="http://onto.virtual-university.org"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://onto.virtual-university.org"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://onto.virtual-university.org#annotationCreatedBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#annotationCreatedBy">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#createdAnnotation"/>
+        <rdfs:comment xml:lang="en">Assigns an annotation to a student. Inverse property: createdAnnotation.</rdfs:comment>
+        <rdfs:label xml:lang="en">annotation created by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#appliesToPanoptoRecording -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#appliesToPanoptoRecording">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Annotation"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#PanoptoRecording"/>
+        <rdfs:comment xml:lang="en">Assigns an annotation to a Panopto recording. Inverse property: panoptoRecordingFor.</rdfs:comment>
+        <rdfs:label xml:lang="en">applies to panopto recording</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#assignedToBreakoutRoom -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#assignedToBreakoutRoom">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://onto.virtual-university.org#Student"/>
+                    <rdf:Description rdf:about="http://onto.virtual-university.org#Teacher"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#BreakoutRoom"/>
+        <rdfs:comment xml:lang="en">Assigns a student or teacher to a breakout room. Inverse property: breakoutRoomAssignedTo</rdfs:comment>
+        <rdfs:label xml:lang="en">assigned to breakout room</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#attendsClass -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#attendsClass">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Student"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:comment xml:lang="en">Assigns a student to a class. Inverse property: classAttendedBy.</rdfs:comment>
+        <rdfs:label xml:lang="en">attends class</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#bookmarkFor -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#bookmarkFor">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#hasBookmark"/>
+        <rdfs:comment xml:lang="en">Assigns a bookmark to a Panopto recording. Inverse property: hasBookmark.</rdfs:comment>
+        <rdfs:label xml:lang="en">bookmark for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#breakoutRoomAssignedTo -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#breakoutRoomAssignedTo">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#assignedToBreakoutRoom"/>
+        <rdfs:comment xml:lang="en">Assigns a breakout room to a student or teacher. Inverse property: assignedToBreakoutRoom</rdfs:comment>
+        <rdfs:label xml:lang="en">breakout room assigned to</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#breakoutRoomFor -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#breakoutRoomFor">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#BreakoutRoom"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#BigBlueButtonConference"/>
+        <rdfs:comment xml:lang="en">Assigns a breakout room to a Big Blue Button conference. Inverse property: hasBreakoutRoom</rdfs:comment>
+        <rdfs:label xml:lang="en">breakout room for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#choosesPollOption -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#choosesPollOption">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Student"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#PollOption"/>
+        <rdfs:comment xml:lang="en">Assigns a student to a poll option. Inverse property: </rdfs:comment>
+        <rdfs:label xml:lang="en">chooses poll option</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#classAttendedBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#classAttendedBy">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#attendsClass"/>
+        <rdfs:comment xml:lang="en">Assigns a class to a student. Inverse property: attendsClass.</rdfs:comment>
+        <rdfs:label xml:lang="en">class attended by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#classHasRecording -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#classHasRecording">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Recording"/>
+        <rdfs:comment xml:lang="en">Assigns a class to a recording. Inverse property: recordingForClass.</rdfs:comment>
+        <rdfs:label xml:lang="en">class has recording</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#classTaughtBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#classTaughtBy">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#teachesClass"/>
+        <rdfs:comment xml:lang="en">Assigns a class to a teacher. Inverse property: teachesClass.</rdfs:comment>
+        <rdfs:label xml:lang="en">class taught by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#classroomCreatedRecording -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#classroomCreatedRecording">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://onto.virtual-university.org#OnlineMeeting"/>
+                    <rdf:Description rdf:about="http://onto.virtual-university.org#PhysicalClassroom"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Recording"/>
+        <rdfs:comment xml:lang="en">Assigns an online classroom to a recording. Inverse property: recordingForClassroom</rdfs:comment>
+        <rdfs:label xml:lang="en">Online classroom created recording</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#classroomUsedFor -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#classroomUsedFor">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#hostedInClassroom"/>
+        <rdfs:comment xml:lang="en">Assings a classroom to a class. Inverse property: hostedInClassroom.</rdfs:comment>
+        <rdfs:label xml:lang="en">classroom used for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#colorCodeAppliesTo -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#colorCodeAppliesTo">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#subjectToColorCode"/>
+        <rdfs:comment xml:lang="en">Assigns a color code to a physical classroom. Inverse property: subjectToColorCode.</rdfs:comment>
+        <rdfs:label xml:lang="en">color code applies to</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#containsFile -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#containsFile">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#CourseMaterial"/>
+        <rdfs:range rdf:resource="http://dbpedia.org/ontology/file"/>
+        <rdfs:comment xml:lang="en">Assigns a course material to a file. Inverse property: fileFor.</rdfs:comment>
+        <rdfs:label xml:lang="en">contains file</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#containsMaterial -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#containsMaterial">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Course"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#CourseMaterial"/>
+        <rdfs:comment xml:lang="en">Assigns a course to course material. Inverse property: materialFor.</rdfs:comment>
+        <rdfs:label xml:lang="en">contains material</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#courseOf -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#courseOf">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#partOfCourse"/>
+        <rdfs:comment xml:lang="en">Assigns a course to a class. Inverse property: partOfCourse</rdfs:comment>
+        <rdfs:label xml:lang="en">course of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#courseTakenBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#courseTakenBy">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#takesCourse"/>
+        <rdfs:comment xml:lang="en">Assigns a course to a student. Inverse property: takesCourse.</rdfs:comment>
+        <rdfs:label xml:lang="en">course taken by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#courseTaughtBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#courseTaughtBy">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#teachesCourse"/>
+        <rdfs:comment xml:lang="en">Assigns a course to a teacher. Inverse property: teachesCourse.</rdfs:comment>
+        <rdfs:label xml:lang="en">course taught by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#createdAnnotation -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#createdAnnotation">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Student"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Annotation"/>
+        <rdfs:comment xml:lang="en">Assigns a student to an annotation. Inverse property: annotationCreatedBy.</rdfs:comment>
+        <rdfs:label xml:lang="en">created annotation</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#fileFor -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#fileFor">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#containsFile"/>
+        <rdfs:comment xml:lang="en">Assigns a file to a course material. Inverse property: containsFile.</rdfs:comment>
+        <rdfs:label xml:lang="en">file for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#hasBookmark -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#hasBookmark">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#PanoptoRecording"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Bookmark"/>
+        <rdfs:comment xml:lang="en">Assigns a Panopto recording to a bookmark. Inverse property: bookMarkFor.</rdfs:comment>
+        <rdfs:label xml:lang="en">has bookmark</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#hasBreakoutRoom -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#hasBreakoutRoom">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#breakoutRoomFor"/>
+        <rdfs:comment xml:lang="en">Assigns a Big Blue Button conference to a breakout room. Inverse property:  breakoutRoomFor</rdfs:comment>
+        <rdfs:label xml:lang="en">has breakout room</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#hasPoll -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#hasPoll">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#BigBlueButtonConference"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Poll"/>
+        <rdfs:comment xml:lang="en">Assigns a Big Blue Button conference to a poll. Inverse property: pollFor.</rdfs:comment>
+        <rdfs:label xml:lang="en">has poll</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#hasPollOption -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#hasPollOption">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Poll"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#PollOption"/>
+        <rdfs:comment xml:lang="en">Assigns a poll to a poll option. Inverse property: pollOptionFor.</rdfs:comment>
+        <rdfs:label xml:lang="en">has poll option</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#hostedInClassroom -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#hostedInClassroom">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Classroom"/>
+        <rdfs:comment xml:lang="en">Assings a class to a classroom. Inverse property: classroomUsedFor.</rdfs:comment>
+        <rdfs:label xml:lang="en">hosted in classroom</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#materialFor -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#materialFor">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#containsMaterial"/>
+        <rdfs:comment xml:lang="en">Assigns course material to a course. Inverse property: containsMaterial.</rdfs:comment>
+        <rdfs:label xml:lang="en">material for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#panoptoRecordingFor -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#panoptoRecordingFor">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#appliesToPanoptoRecording"/>
+        <rdfs:comment xml:lang="en">Assigns a Panopto recording to an annotation. Inverse property: appliesToPanoptoRecording.</rdfs:comment>
+        <rdfs:label xml:lang="en">panopto recording for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#partOfCourse -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#partOfCourse">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Course"/>
+        <rdfs:comment xml:lang="en">Assigns a class to a course. Inverse property: courseOf</rdfs:comment>
+        <rdfs:label xml:lang="en">part of course</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#pollFor -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#pollFor">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#hasPoll"/>
+        <rdfs:comment xml:lang="en">Assigns a poll to a Big Blue Button conference. Inverse property: hasPoll.</rdfs:comment>
+        <rdfs:label xml:lang="en">poll for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#pollOptionChosenBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#pollOptionChosenBy">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#choosesPollOption"/>
+        <rdfs:comment xml:lang="en">Assigns a poll option to a student. Inverse property: pollOptionChosenBy.</rdfs:comment>
+        <rdfs:label xml:lang="en">poll option chosen by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#pollOptionFor -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#pollOptionFor">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#hasPollOption"/>
+        <rdfs:comment xml:lang="en">Assigns a poll option to a poll. Inverse property: hasPollOption.</rdfs:comment>
+        <rdfs:label xml:lang="en">poll option for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#recordingForClass -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#recordingForClass">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#classHasRecording"/>
+        <rdfs:comment xml:lang="en">Assigns a recording to a class. Inverse property: classHasRecording.</rdfs:comment>
+        <rdfs:label xml:lang="en">recording for class</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#recordingForClassroom -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#recordingForClassroom">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#classroomCreatedRecording"/>
+        <rdfs:comment xml:lang="en">Assigns a recording to a online classroom</rdfs:comment>
+        <rdfs:label xml:lang="en">recording for online classroom</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#subjectToColorCode -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#subjectToColorCode">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#PhysicalClassroom"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#ColorCode"/>
+        <rdfs:comment xml:lang="en">Assigns a physical classroom to a color code. Inverse property: colorCodeAppliesTo.</rdfs:comment>
+        <rdfs:label xml:lang="en">subject to color code</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#takesCourse -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#takesCourse">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Student"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Course"/>
+        <rdfs:comment xml:lang="en">Assigns a student to a course. Inverse property: courseTakenBy.</rdfs:comment>
+        <rdfs:label xml:lang="en">takes course</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#teachesClass -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#teachesClass">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Teacher"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:comment xml:lang="en">Assigns a teacher to a class. Inverse property: classTaughtBy.</rdfs:comment>
+        <rdfs:label xml:lang="en">teaches class</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#teachesCourse -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#teachesCourse">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Teacher"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#Course"/>
+        <rdfs:comment xml:lang="en">Assigns a teacher to a course. Inverse property: courseTaughtBy.</rdfs:comment>
+        <rdfs:label xml:lang="en">teaches course</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#usedIn -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#usedIn">
+        <owl:inverseOf rdf:resource="http://onto.virtual-university.org#usesMaterial"/>
+        <rdfs:comment xml:lang="en">Assigns course material to a class. Inverse property: usesMaterial.</rdfs:comment>
+        <rdfs:label xml:lang="en">used in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#usesMaterial -->
+
+
+    <owl:ObjectProperty rdf:about="http://onto.virtual-university.org#usesMaterial">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:range rdf:resource="http://onto.virtual-university.org#CourseMaterial"/>
+        <rdfs:comment xml:lang="en">Assigns a class to course material. Inverse property: usedIn.</rdfs:comment>
+        <rdfs:label xml:lang="en">uses material</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://dbpedia.org/resource/length -->
+
+
+    <owl:DatatypeProperty rdf:about="http://dbpedia.org/resource/length"/>
+    
+
+
+    <!-- http://onto.virtual-university.org#annotationText -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#annotationText">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Annotation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Text of the annotation.</rdfs:comment>
+        <rdfs:label xml:lang="en">annotation text</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#annotationTimestamp -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#annotationTimestamp">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Annotation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Timestamp of the annotation in the recording.</rdfs:comment>
+        <rdfs:label xml:lang="en">annotation timestamp</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#bitrate -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#bitrate">
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#OnlineClassroom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Bitrate of the video feed of the online classroom.</rdfs:comment>
+        <rdfs:label xml:lang="en">bitrate</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#bookmarkText -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#bookmarkText">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Bookmark"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Text of the bookmark.</rdfs:comment>
+        <rdfs:label xml:lang="en">bookmark text</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#bookmarkTimeStamp -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#bookmarkTimeStamp">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Bookmark"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Timestamp of the bookmark in the recording.</rdfs:comment>
+        <rdfs:label xml:lang="en">bookmark timestamp</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#chatHistory -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#chatHistory">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#OnlineMeeting"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Chathistory of the online meeting.</rdfs:comment>
+        <rdfs:label xml:lang="en">chathistory</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#classEndDate -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#classEndDate">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment xml:lang="en">Ending date of the class.</rdfs:comment>
+        <rdfs:label xml:lang="en">class end date</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#classStartDate -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#classStartDate">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment xml:lang="en">Starting date of the class.</rdfs:comment>
+        <rdfs:label xml:lang="en">class start date</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#classSubject -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#classSubject">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Subject of a class.</rdfs:comment>
+        <rdfs:label xml:lang="en">class subject</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#color -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#color">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#ColorCode"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Color of the colorcode.</rdfs:comment>
+        <rdfs:label xml:lang="en">color</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#courseCode -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#courseCode">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Course"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">The identifier of the course used by the university.</rdfs:comment>
+        <rdfs:label xml:lang="en">course code</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#courseCredits -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#courseCredits">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Course"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">The number of credits awarded by completing the course.</rdfs:comment>
+        <rdfs:label xml:lang="en">course credits</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#courseGrading -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#courseGrading">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Course"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">URL to a document describing the grading system used for the course.</rdfs:comment>
+        <rdfs:label xml:lang="en">course grading</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#courseName -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#courseName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Course"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">The name of the course.</rdfs:comment>
+        <rdfs:label xml:lang="en">course name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#dateAdded -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#dateAdded">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#CourseMaterial"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment xml:lang="en">The date on which the course material was added.</rdfs:comment>
+        <rdfs:label xml:lang="en">date added</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#dateModified -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#dateModified">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#CourseMaterial"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment xml:lang="en">The date on which the course material was last modified.</rdfs:comment>
+        <rdfs:label xml:lang="en">date modified</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#employeeId -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#employeeId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Teacher"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">The identifier of an employee used by the university.</rdfs:comment>
+        <rdfs:label xml:lang="en">employee id</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#encoder -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#encoder">
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#OnlineClassroom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Encoder used for the video feed of the online classroom.</rdfs:comment>
+        <rdfs:label xml:lang="en">encoder</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#location -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#location">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#PhysicalClassroom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Description of the location of the room by the univeristy, such as campus, building, floor.</rdfs:comment>
+        <rdfs:label xml:lang="en">location</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#meetingId -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#meetingId">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#ZoomMeeting"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Identifier of the meeting.</rdfs:comment>
+        <rdfs:label xml:lang="en">meeting id</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#notes -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#notes">
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#PanoptoRecording"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Notes of the Panopto recording.</rdfs:comment>
+        <rdfs:label xml:lang="en">notes</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#numberOfAllowedSeats -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#numberOfAllowedSeats">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#PhysicalClassroom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">Number of seats thay may be seated in a physical classroom according to the colorcode.</rdfs:comment>
+        <rdfs:label xml:lang="en">number of allowed seats</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#numberOfSeats -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#numberOfSeats">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#PhysicalClassroom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">Number of actual seats in a physical classroom.</rdfs:comment>
+        <rdfs:label xml:lang="en">number of seats</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#numberOfStudents -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#numberOfStudents">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">Number of students in a class.</rdfs:comment>
+        <rdfs:label xml:lang="en">number of students</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#occupancyChange -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#occupancyChange">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#ColorCode"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment xml:lang="en">The allowed fraction of students in a physical classroom during this color code.</rdfs:comment>
+        <rdfs:label xml:lang="en">occupancy change</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#pollOptionText -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#pollOptionText">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#PollOption"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Text of the poll option.</rdfs:comment>
+        <rdfs:label xml:lang="en">poll option text</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#pollQuestion -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#pollQuestion">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Poll"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Text of the poll question.</rdfs:comment>
+        <rdfs:label xml:lang="en">poll question text</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#recordingLength -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#recordingLength">
+        <rdfs:subPropertyOf rdf:resource="http://dbpedia.org/resource/length"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Recording"/>
+        <rdfs:comment xml:lang="en">Length of a recording.</rdfs:comment>
+        <rdfs:label xml:lang="en">recording length</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#recordingLocation -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#recordingLocation">
+        <rdfs:subPropertyOf rdf:resource="http://onto.virtual-university.org#url"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Recording"/>
+        <rdfs:comment xml:lang="en">Location of recording.</rdfs:comment>
+        <rdfs:label xml:lang="en">recording location</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#resolution -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#resolution">
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#OnlineClassroom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Resolution of the video feed of the online classroom.</rdfs:comment>
+        <rdfs:label xml:lang="en">resolution</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#restrictions -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#restrictions">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#ColorCode"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Text that explains the restrictions that go with this color code.</rdfs:comment>
+        <rdfs:label xml:lang="en">restrictions</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#roomCode -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#roomCode">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#PhysicalClassroom"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">The identifier of the room used by the university.</rdfs:comment>
+        <rdfs:label xml:lang="en">room code</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#sessionUrl -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#sessionUrl">
+        <rdfs:subPropertyOf rdf:resource="http://onto.virtual-university.org#url"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://onto.virtual-university.org#MicrosoftTeamsMeeting"/>
+                    <rdf:Description rdf:about="http://onto.virtual-university.org#PanoptoRecording"/>
+                    <rdf:Description rdf:about="http://onto.virtual-university.org#ZoomMeeting"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:comment xml:lang="en">URL to the Microsoft Teams Meeting.</rdfs:comment>
+        <rdfs:label xml:lang="en">session url</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#studentNumber -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#studentNumber">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://onto.virtual-university.org#Student"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Identifying number of a student used by the university.</rdfs:comment>
+        <rdfs:label xml:lang="en">student id</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://onto.virtual-university.org#url -->
+
+
+    <owl:DatatypeProperty rdf:about="http://onto.virtual-university.org#url">
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#thing"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">URL of a thing.</rdfs:comment>
+        <rdfs:label xml:lang="en">url</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://dbpedia.org/ontology/file -->
+
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/file"/>
+    
+
+
+    <!-- http://dbpedia.org/resource/Media -->
+
+
+    <owl:Class rdf:about="http://dbpedia.org/resource/Media"/>
+    
+
+
+    <!-- http://onto.virtual-university.org#Annotation -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Annotation">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.virtual-university.org#annotationCreatedBy"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.virtual-university.org#appliesToPanoptoRecording"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">Annotation in Panopto recording</rdfs:comment>
+        <rdfs:label xml:lang="en">Annotation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#BigBlueButtonConference -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#BigBlueButtonConference">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#OnlineMeeting"/>
+        <rdfs:comment xml:lang="en">Big Blue Button conference</rdfs:comment>
+        <rdfs:label xml:lang="en">Big Blue Button conference</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Book -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Book">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#CourseMaterial"/>
+        <rdfs:comment xml:lang="en">Course material in the form of a book.</rdfs:comment>
+        <rdfs:label xml:lang="en">Book</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Bookmark -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Bookmark">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.virtual-university.org#bookmarkFor"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">Bookmark in Panopto recording</rdfs:comment>
+        <rdfs:label xml:lang="en">Bookmark</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#BreakoutRoom -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#BreakoutRoom">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.virtual-university.org#breakoutRoomFor"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">A breakoutroom of a Big Blue Button conference</rdfs:comment>
+        <rdfs:label xml:lang="en">Breakout room</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Class -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Class">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.virtual-university.org#partOfCourse"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">A class of a course, e.g. a single lecture.</rdfs:comment>
+        <rdfs:label xml:lang="en">Class</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Classroom -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Classroom">
+        <rdfs:comment xml:lang="en">A classroom where classes are taught in.</rdfs:comment>
+        <rdfs:label xml:lang="en">Classroom</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#CodeExample -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#CodeExample">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#CourseMaterial"/>
+        <rdfs:comment xml:lang="en">Course material in the form of code example.</rdfs:comment>
+        <rdfs:label xml:lang="en">Code</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#ColorCode -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#ColorCode">
+        <rdfs:comment xml:lang="en">Color code that is used to restrict physical classrooms.</rdfs:comment>
+        <rdfs:label xml:lang="en">Color code</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Course -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Course">
+        <rdfs:comment xml:lang="en">A course thought at the university.</rdfs:comment>
+        <rdfs:label xml:lang="en">Course</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#CourseMaterial -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#CourseMaterial">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.virtual-university.org#materialFor"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">Course material used for a course and in certain classes.</rdfs:comment>
+        <rdfs:label xml:lang="en">Course material</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#ExerciseSheet -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#ExerciseSheet">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#CourseMaterial"/>
+        <rdfs:comment xml:lang="en">Course material in the form of an exercise-sheet.</rdfs:comment>
+        <rdfs:label xml:lang="en">Book</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#GuestLecturer -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#GuestLecturer">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#Teacher"/>
+        <rdfs:comment xml:lang="en">A guest lecturer, e.g. visiting professor, specialist.</rdfs:comment>
+        <rdfs:label xml:lang="en">Guest lecturer</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Handouts -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Handouts">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#CourseMaterial"/>
+        <rdfs:comment xml:lang="en">Course material in the form of handouts.</rdfs:comment>
+        <rdfs:label xml:lang="en">Book</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#LabSession -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#LabSession">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:comment xml:lang="en">Lab session of a course.</rdfs:comment>
+        <rdfs:label xml:lang="en">Lab session</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Lecture -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Lecture">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:comment xml:lang="en">Lecture of a course</rdfs:comment>
+        <rdfs:label xml:lang="en">Lecture</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#MicrosoftTeamsMeeting -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#MicrosoftTeamsMeeting">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#OnlineMeeting"/>
+        <rdfs:comment xml:lang="en">Microsoft Teams meeting</rdfs:comment>
+        <rdfs:label xml:lang="en">Microsoft Teams meeting</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#OnlineClassroom -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#OnlineClassroom">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#Classroom"/>
+        <owl:disjointWith rdf:resource="http://onto.virtual-university.org#PhysicalClassroom"/>
+        <rdfs:comment xml:lang="en">An online classroom where classes are taught in</rdfs:comment>
+        <rdfs:label xml:lang="en">Online classroom</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#OnlineMeeting -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#OnlineMeeting">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#OnlineClassroom"/>
+        <owl:disjointWith rdf:resource="http://onto.virtual-university.org#PanoptoRecording"/>
+        <rdfs:comment xml:lang="en">An online meeting.</rdfs:comment>
+        <rdfs:label xml:lang="en">Online meeting</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#PanoptoRecording -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#PanoptoRecording">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#OnlineClassroom"/>
+        <rdfs:comment xml:lang="en">Panopto recording of lecture</rdfs:comment>
+        <rdfs:label xml:lang="en">Panopto recording</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#PhysicalClassroom -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#PhysicalClassroom">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.virtual-university.org#subjectToColorCode"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#Classroom"/>
+        <rdfs:comment xml:lang="en">A physical classroom where classes are taught in.</rdfs:comment>
+        <rdfs:label xml:lang="en">Physical classroom</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Poll -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Poll">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://onto.virtual-university.org#pollFor"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">A poll to poll students</rdfs:comment>
+        <rdfs:label xml:lang="en">Poll</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#PollOption -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#PollOption">
+        <rdfs:comment xml:lang="en">An option of a poll</rdfs:comment>
+        <rdfs:label xml:lang="en">Poll option</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Professor -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Professor">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#Teacher"/>
+        <rdfs:comment xml:lang="en">A teacher employed as professor.</rdfs:comment>
+        <rdfs:label xml:lang="en">Professor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#QnASession -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#QnASession">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#Class"/>
+        <rdfs:comment xml:lang="en">Q&amp;A session of a course</rdfs:comment>
+        <rdfs:label xml:lang="en">Q&amp;A session</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Recording -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Recording">
+        <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Media"/>
+        <rdfs:comment xml:lang="en">A recording</rdfs:comment>
+        <rdfs:label xml:lang="en">Recording</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Student -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Student">
+        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <rdfs:comment xml:lang="en">A student of the university.</rdfs:comment>
+        <rdfs:label xml:lang="en">Student</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#Teacher -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#Teacher">
+        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <rdfs:comment xml:lang="en">A person that teaches at the university.</rdfs:comment>
+        <rdfs:label xml:lang="en">Teacher</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#TeachingAssistant -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#TeachingAssistant">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#Teacher"/>
+        <rdfs:comment xml:lang="en">A teacher employed as teaching assistent</rdfs:comment>
+        <rdfs:label xml:lang="en">Teaching assistent</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://onto.virtual-university.org#ZoomMeeting -->
+
+
+    <owl:Class rdf:about="http://onto.virtual-university.org#ZoomMeeting">
+        <rdfs:subClassOf rdf:resource="http://onto.virtual-university.org#OnlineMeeting"/>
+        <rdfs:comment xml:lang="en">Zoom meeting</rdfs:comment>
+        <rdfs:label xml:lang="en">Zoom meeting</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#thing -->
+
+
+    <owl:Class rdf:about="http://www.w3.org/2002/07/owl#thing"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://onto.virtual-university.org#BigBlueButtonConference"/>
+            <rdf:Description rdf:about="http://onto.virtual-university.org#MicrosoftTeamsMeeting"/>
+            <rdf:Description rdf:about="http://onto.virtual-university.org#ZoomMeeting"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://onto.virtual-university.org#GuestLecturer"/>
+            <rdf:Description rdf:about="http://onto.virtual-university.org#Professor"/>
+            <rdf:Description rdf:about="http://onto.virtual-university.org#TeachingAssistant"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://onto.virtual-university.org#LabSession"/>
+            <rdf:Description rdf:about="http://onto.virtual-university.org#Lecture"/>
+            <rdf:Description rdf:about="http://onto.virtual-university.org#QnASession"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 5.1.14) https://github.com/owlcs/owlapi/ -->
+
+

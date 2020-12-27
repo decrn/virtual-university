@@ -1,0 +1,1000 @@
+# This is the vocabulary for creating R2RML
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+# This is the vocabulary of our ontology
+@prefix : <http://onto.virtual-university.org#> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml:      <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dbpedia:  <http://dbpedia.org/resource/> .
+@prefix dbo:      <http://dbpedia.org/ontology/>
+
+<#Courses>  a 	rr:TriplesMap;
+            rr:logicalTable [rr:tableName "tbl_Courses"];
+            
+            rr:subjectMap [ 
+                rr:template "http://onto.virtual-university.org#course_{col_coursenumber}" ;
+                rr:class :Course;
+            ];
+            
+            rr:predicateObjectMap [
+                rr:predicate :courseCode;
+                rr:objectMap [rr:column "col_coursenumber"];
+            ];
+
+            rr:predicateObjectMap [
+                rr:predicate :courseName;
+                rr:objectMap [rr:column "col_name"];
+            ];
+			
+            rr:predicateObjectMap [
+                rr:predicate :courseGrading;
+                rr:objectMap [rr:column "col_grading_information"];
+            ];
+			
+            
+            rr:predicateObjectMap [
+                rr:predicate :courseCredits;
+                rr:objectMap [rr:column "col_ects_credits"];
+            ].
+
+<#StudentsView> rr:sqlQuery """
+select p.col_username as col_username, s.col_student_id as col_student_id, p.col_id as col_person_id
+from tbl_Students s, tbl_Persons p
+where s.col_person = p.col_id
+
+""".
+
+<#TeachingAssistantsView> rr:sqlQuery """
+select p.col_username as col_username
+from tbl_Teachers t, tbl_Persons p, tbl_Teachertypes tt
+where t.col_person = p.col_id and t.col_teachertype = tt.col_id
+and tt.col_teachertype = 'TeachingAssistant'
+""".
+
+<#ProfessorsView> rr:sqlQuery """
+select p.col_username as col_username
+from tbl_teachers t, tbl_persons p, tbl_teachertypes tt
+where t.col_person = p.col_id and t.col_teachertype = tt.col_id
+and tt.col_teachertype = 'Professor'
+""".
+
+<#TeachersView> rr:sqlQuery """
+select p.col_username as col_username, t.col_employee_id as col_employee_id, t.col_id as col_teacher_id
+from tbl_teachers t, tbl_persons p
+where t.col_person = p.col_id 
+""".
+
+
+
+<#TeachingAssistants> a rr:TriplesMap;
+		rr:logicalTable <#TeachingAssistantsView>;
+        
+ 		rr:subjectMap [
+ 			rr:template "http://onto.virtual-university.org#person_{col_username}";
+ 			rr:class :TeachingAssistent;
+ 		];
+ 		.
+<#Professors> a rr:TriplesMap;
+         rr:logicalTable <#ProfessorsView>;
+       
+         rr:subjectMap [
+             rr:template "http://onto.virtual-university.org#person_{col_username}";
+             rr:class :Professor;
+         ];
+         .		
+		 
+<#Teachers> a rr:TriplesMap;
+		rr:logicalTable <#TeachersView>;
+      
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#person_{col_username}" ;
+			
+		];
+       
+		rr:predicateObjectMap [
+			rr:predicate :employeeId;
+			rr:objectMap [rr:column "col_employee_id"];
+		];
+		.
+
+
+<#Students> a rr:TriplesMap;
+		rr:logicalTable <#StudentsView>;
+       
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#person_{col_username}" ;
+			rr:class :Student;
+		];
+		rr:predicateObjectMap [
+			rr:predicate :studentNumber;
+			rr:objectMap [rr:column "col_student_id"];
+		];
+       
+		.						
+
+
+ <#Persons> 	a 	rr:TriplesMap;
+             rr:logicalTable [rr:tableName "tbl_Persons"];
+           
+             rr:subjectMap [ 
+                 rr:template "http://onto.virtual-university.org#person_{col_username}" ;
+                 
+             ];
+            
+             rr:predicateObjectMap [
+                 rr:predicate foaf:firstName;
+                 rr:objectMap [rr:column "col_firstname"];
+             ];
+            
+             rr:predicateObjectMap [
+                 rr:predicate foaf:familyName;
+                 rr:objectMap [rr:column "col_lastname"];
+             ];
+           
+             rr:predicateObjectMap [
+                 rr:predicate foaf:nick;
+                 rr:objectMap [rr:column "col_username"];
+             ];
+           
+             rr:predicateObjectMap [
+                 rr:predicate foaf:mbox;
+                 rr:objectMap [rr:column "col_email"];
+             ];
+             .
+
+ <#LecturesView> rr:sqlQuery """
+ select c.col_id as col_id
+ from tbl_Classes c, tbl_Classtypes ct
+ where c.col_classtype = ct.col_id
+ and ct.col_classtype = 'Lecture'
+ """.
+ <#Lectures> a rr:TriplesMap;
+     rr:logicalTable <#LecturesView>;
+   
+     rr:subjectMap [
+         rr:template "http://onto.virtual-university.org#class_{col_id}" ;
+         rr:class :Lecture;
+     ];
+     .
+ <#LabSessionsView> rr:sqlQuery """
+ select c.col_id as col_id
+ from tbl_Classes c, tbl_Classtypes ct
+ where c.col_classtype = ct.col_id
+ and ct.col_classtype = 'LabSession'
+ """.	
+ <#LabSessions> a rr:TriplesMap;
+         rr:logicalTable <#LabSessionsView>;
+       
+         rr:subjectMap [
+             rr:template "http://onto.virtual-university.org#class_{col_id}" ;
+             rr:class :LabSession ;
+         ];
+ .		
+ <#QnASessionsView> rr:sqlQuery """
+ select c.col_id as col_id
+ from tbl_Classes c, tbl_Classtypes ct
+ where c.col_classtype = ct.col_id
+ and ct.col_classtype = 'QnASession'
+ """.
+ <#QnASessions> a rr:TriplesMap;
+         rr:logicalTable <#QnASessionsView>;
+       
+         rr:subjectMap [
+             rr:template "http://onto.virtual-university.org#class_{col_id}" ;
+             rr:class :QnASession ;
+         ];
+ .
+ <#Classes> a rr:TriplesMap;
+         rr:logicalTable [rr:tableName "tbl_Classes"];
+       
+         rr:subjectMap [
+             rr:template "http://onto.virtual-university.org#class_{col_id}" ;
+         ];
+       
+         rr:predicateObjectMap [
+             rr:predicate :classId;
+             rr:objectMap [rr:column "col_id"];
+         ];
+       
+         rr:predicateObjectMap [
+             rr:predicate :classStartDate;
+             rr:objectMap [ a rr:ObjectMap, rr:TermMap; 
+                    rr:column "col_startdate";
+                    rr:datatype xsd:dateTime;
+                    rr:termType rr:Literal
+            ];
+             
+         ];
+       
+         rr:predicateObjectMap [
+             rr:predicate :classEndDate;
+             rr:objectMap [ a rr:ObjectMap, rr:TermMap; 
+                    rr:column "col_enddate";
+                    rr:datatype xsd:dateTime;
+                    rr:termType rr:Literal
+            ];
+         ];
+       
+         rr:predicateObjectMap [
+             rr:predicate :classSubject;
+             rr:objectMap [rr:column "col_subject"];
+         ];
+         .	
+          
+<#Classes> 
+    rr:predicateObjectMap   [
+        rr:predicate :partOfCourse;
+        rr:objectMap [
+            rr:parentTriplesMap <#Courses>;
+
+            rr:joinCondition [
+                rr:child "col_course";
+                rr:parent "col_id";
+            ];
+        ];
+    ]
+	.
+           
+<#Recordings> a rr:TriplesMap;
+		rr:logicalTable [rr:tableName "tbl_Recordings"];
+      
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#Recording_{col_id}" ;
+			rr:class :Recording ;
+		];
+       
+		rr:predicateObjectMap [
+			rr:predicate :recordingLocation;
+			rr:objectMap [rr:column "col_url"];
+		];
+
+        rr:predicateObjectMap [
+			rr:predicate ::recordingLength;
+			rr:objectMap [rr:column "col_duration"];
+		];
+
+        rr:predicateObjectMap [
+            rr:predicate :recordingForClassroom;
+            rr:objectMap [
+                rr:parentTriplesMap <#MicrosoftTeamsMeetings>;
+                rr:joinCondition [
+                    rr:child "col_id";
+                    rr:parent "col_recordings_id";
+                ];
+            ];
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :recordingForClassroom;
+            rr:objectMap [
+                rr:parentTriplesMap <#BigBlueButtonConferences>;
+                rr:joinCondition [
+                    rr:child "col_id";
+                    rr:parent "col_recordings_id";
+                ];
+            ];
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :recordingForClassroom;
+            rr:objectMap [
+                rr:parentTriplesMap <#ZoomMeetings>;
+                rr:joinCondition [
+                    rr:child "col_id";
+                    rr:parent "col_recordings_id";
+                ];
+            ];
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :recordingForClassroom;
+            rr:objectMap [
+                rr:parentTriplesMap <#PhysicalClassrooms>;
+                rr:joinCondition [
+                    rr:child "col_id";
+                    rr:parent "col_recordings_id";
+                ];
+            ];
+        ];
+		.
+		
+<#Classes> a rr:TriplesMap;
+	rr:predicateObjectMap [
+            rr:predicate :classHasRecording;
+            rr:objectMap [
+                rr:parentTriplesMap <#Recordings>;
+                rr:joinCondition [
+                    rr:child "col_id";
+                    rr:parent "col_classid";
+                ];
+            ];
+        ]
+        .
+#Mappings from classroom. 
+<#Classrooms> a rr:TriplesMap;
+        rr:logicalTable [ rr:tableName "tbl_ClassInClassroom" ];
+
+        rr:subjectMap [
+            rr:template "http://onto.virtual-university.org#classroom_{col_classroom_id}" ;
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :classroomUsedFor;
+            rr:objectMap [
+				rr:template "http://onto.virtual-university.org#class_{col_class_id}";
+			];
+        ];
+        .
+		
+<#OnlineClassrooms> a rr:TriplesMap;
+    rr:logicalTable [ rr:tableName "tbl_OnlineClassrooms" ];
+
+    rr:subjectMap [
+        rr:template "http://onto.virtual-university.org#classroom_{col_classroom_id}";
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :encoder;
+        rr:objectMap [rr:column "col_encoder"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :resolution;
+        rr:objectMap [rr:column "col_resolution"];
+    ];
+
+    # bitrate zit niet in ontology
+
+    rr:predicateObjectMap [
+        rr:predicate :bitrate;
+        rr:objectMap [rr:column "col_bitrate"];
+    ];
+
+    .		
+
+<#ZoomMeetingView> rr:sqlQuery """
+ select oc.col_classroom_id as col_classroom_id, zm.col_meeting_id as col_meeting_id, zm.col_url, r.col_id as col_recordings_id
+ from tbl_OnlineClassrooms oc, tbl_ZoomMeeting zm
+ left join tbl_Recordings r on r.col_classroom_id = oc.col_classroom_id
+ where oc.col_id = zm.col_online_classroom
+ """.
+
+<#ZoomMeetings> a rr:TriplesMap;
+    rr:logicalTable <#ZoomMeetingView>;
+
+    rr:subjectMap [
+        rr:template "http://onto.virtual-university.org#classroom_{col_classroom_id}";
+        rr:class :ZoomMeeting ;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :meetingId;
+        rr:objectMap [rr:column "col_meeting_id"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :sessionUrl;
+        rr:objectMap [ rr:column "col_url" ];
+    ];
+    .
+	
+<#MicrosoftTeamsMeetingView> rr:sqlQuery """
+ select oc.col_classroom_id as col_classroom_id, ms.col_session_url as col_session_url, ms.col_chat_history as col_chat_history, r.col_id as col_recordings_id
+ from tbl_OnlineClassrooms oc, tbl_MicrosoftTeamsMeeting ms
+ left join tbl_Recordings r on r.col_classroom_id = oc.col_classroom_id
+ where oc.col_id = ms.col_online_classroom
+ """.
+
+<#MicrosoftTeamsMeetings> a rr:TriplesMap;
+    rr:logicalTable <#MicrosoftTeamsMeetingView>;
+
+    rr:subjectMap [
+        rr:template "http://onto.virtual-university.org#classroom_{col_classroom_id}";
+        rr:class :MicrosoftTeamsMeeting;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :sessionUrl;
+        rr:objectMap [ rr:column "col_session_url" ];
+    ];
+
+
+	rr:predicateObjectMap [
+		rr:predicate :chatHistory;
+		rr:objectMap [ rr:column "col_chat_history"];
+	];
+
+    # chat history zit niet in ontology
+    # chat history in DB zou TEXT moeten worden ipv VARCHAR(1024)
+    .
+	
+<#PanoptoRecordingView> rr:sqlQuery """
+ select oc.col_classroom_id as col_classroom_id, pr.col_notes as col_notes, pr.col_id as col_recording_id, pr.col_url
+ from tbl_OnlineClassrooms oc, tbl_PanoptoRecording pr
+ where oc.col_id = pr.col_online_classroom
+ """.
+
+<#PanoptoRecordings> a rr:TriplesMap;
+    rr:logicalTable <#PanoptoRecordingView>;
+
+    # in DB col_timestamp_in_recording is een TIME type 
+    # not sure waar dit voor dient?
+
+    rr:subjectMap [
+        rr:template "http://onto.virtual-university.org#classroom_{col_classroom_id}";
+        rr:class :PanoptoRecording;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :notes;
+        rr:objectMap [ rr:column "col_notes" ];
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate :sessionUrl;
+        rr:objectMap [ rr:column "col_url" ];
+    ];
+    .
+
+<#PhysicalClassroomsView> rr:sqlQuery """
+SELECT CAST(ROUND(p.col_number_of_seats * c.col_occupancy_change - 0.5) AS INT) AS col_allowed_seats, r.col_id as col_recordings_id, p.*
+FROM tbl_PhysicalClassrooms p 
+JOIN tbl_ColorCodes c ON p.col_color_code = c.col_id
+JOIN tbl_Classrooms cr ON cr.col_id = p.col_classroom_id
+LEFT JOIN tbl_Recordings r ON cr.col_id = r.col_classroom_id
+""".	
+
+<#PhysicalClassrooms> a rr:TriplesMap;
+		rr:logicalTable <#PhysicalClassroomsView>;
+      
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#classroom_{col_classroom_id}" ;
+			rr:class :PhysicalClassroom ;
+		];
+       
+		rr:predicateObjectMap [
+			rr:predicate :numberOfSeats;
+			rr:objectMap [rr:column "col_number_of_seats"];
+		];
+
+        rr:predicateObjectMap [
+			rr:predicate :roomCode;
+			rr:objectMap [rr:column "col_room_nr"];
+		];
+
+        rr:predicateObjectMap [
+			rr:predicate :numberOfAllowedSeats;
+			rr:objectMap [rr:column "col_allowed_seats"];
+		];
+		
+        rr:predicateObjectMap [
+            rr:predicate :location;
+			rr:objectMap [rr:column "col_location"];
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :subjectToColorCode;
+            rr:objectMap [
+                rr:parentTriplesMap <#ColorCode>;
+                rr:joinCondition [
+                    rr:child "col_color_code";
+                    rr:parent "col_id";
+                ];
+            ];
+        ]
+        .	
+
+		
+<#ColorCode> a rr:TriplesMap;
+		rr:logicalTable [rr:tableName "tbl_ColorCodes"];
+      
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#colorcode_{col_color}" ;
+			rr:class :ColorCode ;
+		];
+       
+		rr:predicateObjectMap [
+			rr:predicate :color;
+			rr:objectMap [rr:column "col_color"];
+		];
+
+        rr:predicateObjectMap [
+			rr:predicate :occupancyChange;
+			rr:objectMap [rr:column "col_occupancy_change"];
+		];
+
+        rr:predicateObjectMap [
+			rr:predicate :restrictions;
+			rr:objectMap [rr:column "col_restrictions"];
+		];
+
+        
+
+		.	
+
+<#Bookmarks> a rr:TriplesMap;
+    rr:logicalTable [ rr:tableName "tbl_PanoptoRecordingBookmark" ];
+
+    rr:subjectMap [
+        rr:template "http://onto.virtual-university.org#bookmark_{col_id}";
+        rr:class :Bookmark;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :bookmarkText;
+        rr:objectMap [ rr:column "col_text" ];
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate :bookmarkTimeStamp;
+        rr:objectMap [ rr:column "col_timestamp_in_recording" ];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :bookmarkFor;
+        rr:objectMap [
+            rr:parentTriplesMap <#PanoptoRecordings>;
+            rr:joinCondition [
+                rr:child "col_panopto_recording";
+                rr:parent "col_recording_id"; 
+            ];
+        ];
+    ];
+    .
+
+<#Annotation> a rr:TriplesMap;
+    rr:logicalTable [ rr:tableName "tbl_PanoptoRecordingAnnotation" ];
+
+    rr:subjectMap [
+        rr:template "http://onto.virtual-university.org#annotation_{col_id}";
+        rr:class :Annotation;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :annotationText;
+        rr:objectMap [ rr:column "col_text" ];
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate :annotationTimestamp;
+        rr:objectMap [ rr:column "col_timestamp_in_recording" ];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :appliesToPanoptoRecording;
+        rr:objectMap [
+            rr:parentTriplesMap <#PanoptoRecordings>;
+            rr:joinCondition [
+                rr:child "col_panopto_recording";
+                rr:parent "col_recording_id"; 
+            ];
+        ];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :annotationCreatedBy;
+        rr:objectMap [
+            rr:parentTriplesMap <#Students>;
+            rr:joinCondition [
+                rr:child "col_created_by_student";
+                rr:parent "col_person_id"; 
+            ];
+        ];
+    ];
+
+    .
+
+<#SubscriptionsView> rr:sqlQuery """
+select p.col_username as col_username, c.col_coursenumber as col_coursenumber
+from tbl_Subscriptions sb, tbl_Students s, tbl_Persons p, tbl_Courses c
+where sb.col_studentid = s.col_id and s.col_person = p.col_id
+and c.col_id = sb.col_courseid 	
+""".
+
+<#Subscriptions> a rr:TriplesMap;
+        rr:logicalTable <#SubscriptionsView>;
+
+        rr:subjectMap [
+            rr:template "http://onto.virtual-university.org#person_{col_username}" ;
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :takesCourse;
+            rr:objectMap [
+				rr:template "http://onto.virtual-university.org#course_{col_coursenumber}";
+			];
+        ];
+        .	
+
+<#AttendancesView> rr:sqlQuery """
+select p.col_username as col_username, a.col_classid as col_classid
+from tbl_Attendance a, tbl_Students s, tbl_Persons p, tbl_Classes c
+where a.col_studentid = s.col_id and s.col_person = p.col_id
+and c.col_id = a.col_classid 		
+""".
+
+<#Attendances> a rr:TriplesMap;
+        rr:logicalTable <#AttendancesView>;
+
+        rr:subjectMap [
+            rr:template "http://onto.virtual-university.org#person_{col_username}" ;
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :attendsClass;
+            rr:objectMap [
+				rr:template "http://onto.virtual-university.org#class_{col_classid}";
+			];
+        ];
+        .	
+
+
+<#TeachersTeachingCoursesView> rr:sqlQuery """
+select p.col_username as col_username, co.col_coursenumber as col_coursenumber
+from tbl_Classes c
+join tbl_Teachers t on c.col_teacher = t.col_id
+join tbl_Persons p on p.col_id = t.col_person
+join tbl_courses co on co.col_id = c.col_course		
+""".
+
+<#TeachersTeachingCourses> a rr:TriplesMap;
+        rr:logicalTable <#TeachersTeachingCoursesView>;
+
+        rr:subjectMap [
+            rr:template "http://onto.virtual-university.org#person_{col_username}" ;
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :teachesCourse;
+            rr:objectMap [
+				rr:template "http://onto.virtual-university.org#course_{col_coursenumber}";
+			];
+        ];
+        .	
+          
+<#Classes> 
+    rr:predicateObjectMap   [
+        rr:predicate :classTaughtBy;
+        rr:objectMap [
+            rr:parentTriplesMap <#Teachers>;
+
+            rr:joinCondition [
+                rr:child "col_teacher";
+                rr:parent "col_teacher_id";
+            ];
+        ];
+    ]
+	.
+
+<#BigBlueButtonConferenceView> rr:sqlQuery """
+ select oc.col_classroom_id as col_classroom_id, bbb.col_id as conference_id, bbb.col_chat_history as col_chat_history, r.col_id as col_recordings_id
+ from tbl_OnlineClassrooms oc, tbl_BigBlueButtonMeeting bbb
+ left join tbl_Recordings r on r.col_classroom_id = oc.col_classroom_id
+ where oc.col_id = bbb.col_online_classroom
+ """.
+
+
+<#BigBlueButtonConferences> a rr:TriplesMap;
+    rr:logicalTable <#BigBlueButtonConferenceView>;
+
+    rr:subjectMap [
+        rr:template "http://onto.virtual-university.org#classroom_{col_classroom_id}";
+        rr:class :BigBlueButtonConference;
+    ];
+
+
+	rr:predicateObjectMap [
+		rr:predicate :chatHistory;
+		rr:objectMap [ rr:column "col_chat_history"];
+	];
+    .	
+	
+<#BreakoutRooms> a rr:TriplesMap;
+    rr:logicalTable [ rr:tableName "tbl_BreakoutRoom" ];
+
+    rr:subjectMap [
+        rr:template "http://onto.virtual-university.org#breakoutroom_{col_id}";
+        rr:class :BreakoutRoom;
+    ];
+
+    # IN ONTOLOGY: No startdate or duration of Breakout Room, needed? 
+
+    rr:predicateObjectMap [
+        rr:predicate :breakoutRoomFor;
+        rr:objectMap [
+            rr:parentTriplesMap <#BigBlueButtonConferences>;
+            rr:joinCondition [
+                rr:child "col_bigbluebutton_meeting";
+                rr:parent "conference_id";
+            ];
+        ];
+    ];
+    .
+	
+<#BreakoutRoomAttendancesView> rr:sqlQuery """
+select p.col_username as col_username, b.col_id as col_id
+from tbl_BreakoutRoomParticipation brp, tbl_Persons p, tbl_BreakoutRoom b
+where brp.col_person_id = p.col_id and brp.col_breakout_room = b.col_id 		
+""".
+
+<#BreakoutRoomAttendances> a rr:TriplesMap;
+        rr:logicalTable <#BreakoutRoomAttendancesView>;
+
+        rr:subjectMap [
+            rr:template "http://onto.virtual-university.org#person_{col_username}" ;
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :assignedToBreakoutRoom;
+            rr:objectMap [
+				rr:template "http://onto.virtual-university.org#breakoutroom_{col_id}";
+			];
+        ];
+        .		
+
+<#Polls> a rr:TriplesMap;
+		rr:logicalTable [rr:tableName "tbl_Poll"];
+      
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#BigBlueButtonPoll_{col_id}";
+			rr:class :Poll;
+		];
+
+        # IN ONTOLOGY: POLL QUESTION IS MISSING
+
+        rr:predicateObjectMap [
+            rr:predicate :pollFor;
+            rr:objectMap [
+                rr:parentTriplesMap <#BigBlueButtonConferences>;
+                rr:joinCondition [
+                    rr:child "col_bigbluebutton_meeting";
+                    rr:parent "conference_id";
+                ];
+            ];
+        ];
+
+        rr:predicateObjectMap [
+			rr:predicate :pollQuestion;
+			rr:objectMap [rr:column "col_question"];
+		];
+
+		.
+
+<#PollOptions> a rr:TriplesMap;
+		rr:logicalTable [rr:tableName "tbl_PollOptions"];
+      
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#polloption_{col_id}" ;
+			rr:class :PollOption ;
+		];
+
+        rr:predicateObjectMap [
+			rr:predicate :pollOptionText;
+			rr:objectMap [rr:column "col_text"];
+		];
+
+        rr:predicateObjectMap [
+            rr:predicate :pollOptionFor;
+            rr:objectMap [
+                rr:parentTriplesMap <#Polls>;
+                rr:joinCondition [
+                    rr:child "col_poll";
+                    rr:parent "col_id";
+                ];
+            ];
+        ];
+
+        ## TODO:
+        ## Mappen van students naar poll options
+        ## DIT MOET ANDERS, ClassInClassrooms situatie met zo nen join tabel (tbl_PollVotes)
+        
+    	.
+		
+
+
+<#PollOptionVotesView> rr:sqlQuery """
+select p.col_username as col_username, po.col_id as col_polloption_id
+from tbl_Persons p, tbl_PollVotes pv, tbl_PollOptions po
+where p.col_id = pv.col_student and pv.col_poll_option = po.col_id	
+""".
+
+<#PollOptionVotes> a rr:TriplesMap;
+        rr:logicalTable <#PollOptionVotesView>;
+
+        rr:subjectMap [
+            rr:template "http://onto.virtual-university.org#person_{col_username}" ;
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :choosesPollOption;
+            rr:objectMap [
+				rr:template "http://onto.virtual-university.org#polloption_{col_polloption_id}" ;
+			];
+        ];
+        .	
+
+
+<#CodeExamplesView> rr:sqlQuery """
+select cm.col_id as col_id
+from tbl_CourseMaterial cm, tbl_CourseMaterialTypes cmt
+where cm.col_coursematerialtype = cmt.col_id and cmt.col_coursematerialtype = 'code' 
+""".
+
+<#CodeExamples> a rr:TriplesMap;
+        rr:logicalTable <#CodeExamplesView>;
+		
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#coursematerial_{col_id}" ;
+			rr:class :CodeExample ;
+		].
+
+<#HandoutsView> rr:sqlQuery """
+select cm.col_id as col_id
+from tbl_CourseMaterial cm, tbl_CourseMaterialTypes cmt
+where cm.col_coursematerialtype = cmt.col_id and cmt.col_coursematerialtype = 'handouts' 
+""".
+
+<#Handouts> a rr:TriplesMap;
+        rr:logicalTable <#HandoutsView>;
+		
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#coursematerial_{col_id}" ;
+			rr:class :Handouts ;
+		].
+
+<#BooksView> rr:sqlQuery """
+select cm.col_id as col_id
+from tbl_CourseMaterial cm, tbl_CourseMaterialTypes cmt
+where cm.col_coursematerialtype = cmt.col_id and cmt.col_coursematerialtype = 'book' 
+""".
+
+<#Books> a rr:TriplesMap;
+        rr:logicalTable <#BooksView>;
+		
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#coursematerial_{col_id}" ;
+			rr:class :Book ;
+		].        
+
+<#ExerciseSheetsView> rr:sqlQuery """
+select cm.col_id as col_id
+from tbl_CourseMaterial cm, tbl_CourseMaterialTypes cmt
+where cm.col_coursematerialtype = cmt.col_id and cmt.col_coursematerialtype = 'exercises' 
+""".
+
+<#ExerciseSheets> a rr:TriplesMap;
+        rr:logicalTable <#ExerciseSheetsView>;
+		
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#coursematerial_{col_id}" ;
+			rr:class :ExerciseSheet ;
+		].        
+
+
+<#CourseMaterialFilesView> rr:sqlQuery """
+select cm.col_id as col_id, cm.col_url as col_url, cm.col_fileextension as col_fileextension
+from tbl_CourseMaterial cm, tbl_CourseMaterialTypes cmt
+where cm.col_coursematerialtype = cmt.col_id and cmt.col_coursematerialtype = 'code' 
+""".
+
+<#CourseMaterialFiles> a rr:TriplesMap;
+	#rr:logicalTable <#CourseMaterialFilesView>;
+    rr:logicalTable [rr:tableName "tbl_CourseMaterial"];
+		
+		rr:subjectMap [ 
+			rr:template "http://onto.virtual-university.org#coursematerialfile_{col_id}" ;
+			rr:class dbo:file ;
+		];
+		
+		rr:predicateObjectMap [
+            rr:predicate dbo:fileURL;
+            rr:objectMap [rr:column "col_url"];
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate dbo:fileExtension;
+            rr:objectMap [rr:column "col_fileextension"];
+        ];
+		.
+
+    
+
+<#CourseMaterials> a rr:TriplesMap;
+    rr:logicalTable [rr:tableName "tbl_CourseMaterial"];
+
+    rr:subjectMap [ 
+		rr:template "http://onto.virtual-university.org#coursematerial_{col_id}" ;
+	];   
+
+    rr:predicateObjectMap [
+        rr:predicate :dateAdded;
+        rr:objectMap [ a rr:ObjectMap, rr:TermMap; 
+            rr:column "col_date_added";
+            rr:datatype xsd:dateTime;
+            rr:termType rr:Literal
+        ];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate :dateModified;
+        rr:objectMap [ a rr:ObjectMap, rr:TermMap; 
+            rr:column "col_date_changed";
+            rr:datatype xsd:dateTime;
+            rr:termType rr:Literal
+        ];
+    ];
+
+    rr:predicateObjectMap   [
+        rr:predicate :materialFor;
+        rr:objectMap [
+            rr:parentTriplesMap <#Courses>;
+
+            rr:joinCondition [
+                rr:child "col_course";
+                rr:parent "col_id";
+            ];
+        ];
+    ];
+
+    rr:predicateObjectMap   [
+        rr:predicate :containsWork;
+        rr:objectMap [
+            rr:parentTriplesMap <#CourseMaterialFiles>;
+
+            rr:joinCondition [
+                rr:child "col_id";
+                rr:parent "col_id";
+            ];
+        ];
+    ]
+	
+	.
+
+<#CourseMaterialUsedInClassesView> rr:sqlQuery """
+select c.col_id as col_class_id,  cm.col_id as col_coursematerial_id
+from tbl_Classes c, tbl_CourseMaterialUsedInClass cmuic, tbl_CourseMaterial cm
+where c.col_id = cmuic.col_class_id and cm.col_id = cmuic.col_course_material_id	
+""".
+
+<#CourseMaterialUsedInClasses> a rr:TriplesMap;
+        rr:logicalTable <#CourseMaterialUsedInClassesView>;
+
+        rr:subjectMap [
+            rr:template "http://onto.virtual-university.org#class_{col_class_id}" ;
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :usesMaterial;
+            rr:objectMap [
+				rr:template "http://onto.virtual-university.org#coursematerial_{col_coursematerial_id}";
+			];
+        ];
+        .	    
+
+<#ClassAttendancesView> rr:sqlQuery """
+SELECT c.col_id, COUNT(a.col_studentid) AS col_attendance
+FROM tbl_Attendance a JOIN tbl_Classes c ON a.col_classid = c.col_id
+GROUP BY c.col_id
+""".
+
+<#ClassAttendances> a rr:TriplesMap;
+        rr:logicalTable <#ClassAttendancesView>;
+
+        rr:subjectMap [
+            rr:template "http://onto.virtual-university.org#class_{col_id}" ;
+        ];
+
+        rr:predicateObjectMap [
+            rr:predicate :numberOfStudents;
+            rr:objectMap [rr:column "col_attendance"] ;
+			
+        ];
+        .	
+
+
+
+
+

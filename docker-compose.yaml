@@ -1,0 +1,29 @@
+version: "3.1"
+
+services:
+  widoco:
+    build: services/widoco/.
+    volumes:
+      - ./data/public:/output
+      - ./data/virtual-university.ttl:/ontology.owl # has to be an owl file
+  
+  jettynfuseki:
+    build: services/fuseki/.
+    ports:
+      - 8080:8080   
+  webapp:
+    image: nginx
+    ports:
+      - 8081:80
+    volumes:
+      - ./services/webapp:/usr/share/nginx/html
+  other:
+    image: nginx
+    ports:
+      - 8082:80
+    volumes:
+      - ./data/public:/usr/share/nginx/html
+      - ./services/nginx/widoco.conf:/etc/nginx/conf.d/widoco.conf
+  
+  
+

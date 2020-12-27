@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">  
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script src="./react.development.js"></script>
+  <script src="./react-dom.development.js"></script>
+  <script src="./babel.min.js"></script>
+  <script src="./moment.min.js"></script>
+  <script src="./Chart.min.js"></script>
+  <script src="./queries.js"></script>
+
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+  </style>
+  <script type="text/babel">
+
+      const ENDPOINT = "http://localhost:8080/fuseki/virtual-university/query";
+      const FETCH_OPTIONS = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/sparql-results+json',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow'
+      }
+
+      const FETCH_SPARQL = (query, params = []) => {
+        const options = {...FETCH_OPTIONS, body: "query=" + encoder(query, params)};
+        return fetch(ENDPOINT, options).then(res => res.json());
+      }
+      
+      const Pages = {
+        TEACHER_LOOKUP: 'lookup',
+        COURSE_SELECTION: 'selection',
+        COURSE_OVERVIEW: 'overview',
+      }
+
+      const Charts = {
+        ATTENDANCE_PER_CLASS: {// line graph over time of attendance by # students present
+          text:'Attendance by class',
+        },
+        RESULTS_PER_POLL: {// show pie charts of poll results
+          text:'Results per poll',
+        },
+        ACTIVITY_PER_POLL: {// show bar chart of all polls how many replied to each
+          text:'Poll activity',
+        },
+        ACTIVITY_METRIC: {// bar chart of students with the value from custom formula (see use case in intermediate presentation)
+          text:'Custom metric',
+        }
+      }
+
+      function makeRandomColor(){
+        var c = '';
+        while (c.length < 7) {
+          c += (Math.random()).toString(16).substr(-6).substr(-1)
+        }
+        return '#'+c.substring(0,6);
+      }
+
+      class Hello extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            activeView: Pages.TEACHER_LOOKUP,
+            activeTeacher: {},
+            activeCourse: {},
+            activeTeacherCourses: {},
+            loading: false,
+            helpfulError: "",
+            rawError: "",
+          }
+        }
+
+        lookupTeacher = teacher => {
+          // DO Jena Fuseki lookup
+          // parse the resulting json
+          
+          this.setState({
+            loading: true
+          });
+
+          console.log('teacher', teacher)
+
+          FETCH_SPARQL('getTeacherInfo', [teacher])
+            .then(json => {
+              const result = json.results.bindings;
+
+              if(result.length != 1) {
+                this.setState({
+                  helpfulError: "No teacher found for given ID: " + teacher
+                })
+              }
+              const name = result[0].firstName.value + " " + result[0].lastName.value;
+
+              this.setState({
+                activeTeacher: {
+                  employeeId: teacher,
+                  name,
+                }
+              });
+            });
+
+          // TODO!
+          FETCH_SPARQL('getCoursesForTeacher', [teacher])
+            .then(res => {
+              const { bindings } = res.results;
+              
+              console.log('bindings', bindings);
+              const courses = bindings.map(obj => {
+                const platforms = {
+                  "Zoom": obj.zmc?.value,
+                  "Microsoft Teams": obj.mtc?.value,
+                  "Panopto recordings": obj.prc?.value,
+                  "Big Blue Button Conferences": obj.bbc?.value
+                }
+
+                return {
+                  id: obj.code.value,
+                  name: obj.name.value,
+                  credits: obj.credits.value,
+                  color: makeRandomColor(),
+                  studentCount: 11, // TODO: add student count
+                  classCount: 22, // TODO: add class count
+                  platforms,
+                }
+              });
+
+              const activeTeacherCourses = Object.assign({}, ...courses.map((course) => ({[course.id]: course})))
+
+              this.setState({
+                loading: false,
+                activeTeacherCourses,
+                activeView: Pages.COURSE_SELECTION,
+              });
+            })
+            .catch(err => {
+              this.setState({
+                loading: false,
+                helpfulError: "Failed to load teacher from SPARQL endpoint.",
+                rawError: err + ""
+              });
+              console.log(err);
+            });          
+        }
+
+        lookupCourse = course => {
+          // Do Jena Fuseki lookup
+          // parse resulting json
+
+          this.setState({
+            activeCourse: course,
+            activeView: Pages.COURSE_OVERVIEW
+          })
+        }
+
+        showCourseSelection = () => {
+          this.setState({
+            activeView: Pages.COURSE_SELECTION
+          })
+        }
+        
+        renderCurrentPage = () => {
+          switch(this.state.activeView) {
+            case Pages.TEACHER_LOOKUP: return (
+              <TeacherSelectionPage 
+                onTeacherChosen={teacher => this.lookupTeacher(teacher)} />
+            )
+            case Pages.COURSE_SELECTION: return (
+              <CoursesPage onCourseChosen={course => this.lookupCourse(course)} teacher={this.state.activeTeacher} courses={this.state.activeTeacherCourses} />
+            )
+          }
+        }
+
+        render() {
+          return (
+            <>
+            { // check if there are any errors
+              (this.state.rawError || this.state.helpfulError)
+              ? <div style={{backgroundColor: 'darkRed', padding: 10, margin: 0, color: 'white'}}><h3>{this.state.helpfulError}</h3><p>{this.state.rawError}</p></div>
+              : <></>
+            }
+            <div id="content">{this.renderCurrentPage()}</div>
+            </>
+          )
+        }
+      }
+
+      class OverviewPage extends React.Component {
+
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            course: this.props.course,
+            activeChart: Object.keys(Charts)[0], // render the first chart in the list
+          }
+        }
+
+        render() {
+          const course = this.state.course;
+          console.log('pfs', course.platforms);
+          return (
+            <>
+              <div style={{ border: '1px solid #000', width: '100%', padding: 20, paddingTop: 5}}>
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                  <div style={{width: '100%', textAlign: 'center', border: '1px solid #ccc', borderTop: 0}}><b>{course.studentCount}</b> students enrolled</div>
+                  <div style={{width: '100%', textAlign: 'center', border: '1px solid #ccc', borderTop: 0, borderLeft: 0}}><b>{course.classCount}</b> classes this year</div>
+                </div>
+                <div>
+                <h4>{course.credits} ECTS credits</h4>
+                <h4>Platforms used:</h4>
+                  <ul>
+                    {Object.entries(course.platforms).map(([pf, count]) => (
+                      <li>{pf} (<b>{count}</b> {count == 1 ? 'class' : 'classes'})</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div style={{width: '100%', padding: 20}}>
+                  <h4>Available Charts</h4>
+                  <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                    {Object.entries(Charts).map(([id, val]) => (
+                      <button key={id + val} onClick={() => this.setState({ activeChart: id })}>{val.text}</button>
+                    ))}
+                  </div>
+                  <div style={{marginLeft: 'auto', marginRight: 'auto'}}>
+                    <ChartSpace course={this.props.course} chart={this.state.activeChart} />
+                  </div>
+              </div>
+            </>
+          )
+        }
+      }
+
+      class AttendanceChart extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.chartRef = React.createRef();
+          
+          this.state = {
+            cache: {}
+          }
+        }
+
+        componentDidUpdate() {
+          console.log('updated attendance');
+
+          if (!this.state.cache[this.props.course.id]) {
+            // if not yet present in data cache,
+            // fetch from SPARQL endpoint
+            FETCH_SPARQL('getAttendance', [this.props.course.id])
+              .then(json => {
+                const labels = [];
+                const data = [];
+                json.results.bindings.forEach(bnd => {
+                  labels.push(new Date(bnd.date.value));
+                  data.push(bnd.attendance.value);
+                });
+                
+                this.setState({
+                  cache: {
+                    ...this.state.cache,
+                    [this.props.course.id]: {labels, data},
+                  }
+                })
+              })
+          } else {
+            // if data is present in cache,
+            // render the chart
+            const ctx = this.chartRef.current.getContext("2d");
+            var timeFormat = 'DD/MM/YYYY HH:mm';
+
+            const data = this.state.cache[this.props.course.id].data;
+            const labels = this.state.cache[this.props.course.id].labels;
+
+            new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: labels,
+                datasets: [{
+                  label: this.props.course.name,
+                  backgroundColor: this.props.course.color,
+                  borderColor: this.props.course.color,
+                  fill: false,
+                  data: data
+                }]
+              },
+              options: {
+                scales: {
+                  legend: {
+                    display: false
+                  },
+                  xAxes: [{
+                    type: 'time',
+                    time: {
+                      parser: timeFormat,
+                      tooltipFormat: 'll HH:mm'
+                    },
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Date'
+                    }
+                  }],
+                  yAxes: [{
+                    ticks: {
+                      beginAtZero: true
+                    },
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Number of students'
+                    }
+                  }]
+                },
+              }
+            });
+          }
+        }
+
+        componentDidMount() {
+          // render the chart when the data is fetched
+          this.componentDidUpdate();
+        }
+
+        render() {
+          console.log('rendered attendance')
+          return (
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: 700, height: 300, marginLeft: 'auto', marginRight: 'auto'}}>
+              <h2>{Charts[this.props.chart].text}</h2>
+              <canvas id="chart" ref={this.chartRef}></canvas>
+            </div>
+          )
+        }
+      }
+
+      class PollResultsChart extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            cache: {},
+            random: Math.random()
+          }
+        }
+
+        componentDidUpdate() {
+          if (this.state.count > 3) return
+          console.log('componentDidUpdate')
+          if (!this.state.cache[this.props.course.id]) {
+            // fetch data from SPARQL endpoint
+            FETCH_SPARQL('getPollResults', [this.props.course.id])
+              .then(json => {
+                const labels = [];
+                const data = [];
+                let polls = {};
+                console.log(json.results.bindings)
+                json.results.bindings.forEach(bnd => {
+                  const uri = bnd.poll.value;
+                  const prevData = polls[uri] ? polls[uri].data : [];
+                  const prevLabels = polls[uri] ? polls[uri].labels : [];
+
+                  polls[uri] = {
+                    ...polls[uri],
+                    title: bnd.question.value,
+                    data: [
+                      ...prevData,
+                      bnd.votecount.value
+                    ],
+                    labels: [
+                      ...prevLabels,
+                      bnd.text.value
+                    ]
+                  }
+                })
+                
+                this.setState({
+                  cache: {
+                    ...this.state.cache,
+                    [this.props.course.id]: polls,
+                  }
+                })
+              })
+          } else {
+            // this.setState({random: Math.random()})
+          }
+        }
+
+        componentDidMount() {
+          this.componentDidUpdate();
+        }
+
+        hasData = () => !!this.state.cache[this.props.course.id]
+
+        emptyData = () => this.state.cache[this.props.course.id].labels < 1
+
+        render() { 
+          return (
+            <>
+            <div style={{display: 'flex', justifyContent: 'space-around'}}>
+            { this.hasData()
+              ? !!(this.emptyData())
+                ? <div>No polls to show!</div>
+                : Object.values(this.state.cache[this.props.course.id]).map(single => (<div> <h3>{single.title}</h3><SinglePollChart random={this.state.random} course={this.props.course} data={single} /> </div>))
+              : <div>Loading...</div>
+            }
+            </div>
+            </>
+          )
+        }
+      }
+      
+      class SinglePollChart extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.chartRef = React.createRef();
+        }
+
+        componentDidMount() {
+          const ctx = this.chartRef.current.getContext("2d");
+
+          new Chart(ctx, {
+            type: "bar",
+            title: this.props.data.title,
+            data: {
+              labels: this.props.data.labels,
+              datasets: [
+                {
+                  label: "# of votes",
+                  data: this.props.data.data,
+                  backgroundColor: Array(this.props.data.labels.length).fill(this.props.course.color)
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: false,
+              },
+              tooltips: {
+                display: false,
+              },
+              scales: {
+                yAxes: [{
+                  display: true,
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          })
+        }
+
+        render() {
+          return (
+            <div style={{width: 300, height: 300}}>
+              <p>{this.props.chart}</p>
+
+              <canvas id="chart" width="300" height="300" ref={this.chartRef}></canvas>
+            </div>
+          )
+        }
+      }
+
+      class PollActivityChart extends React.Component {
+        constructor(props) {
+          super(props);
+          this.chartRef = React.createRef();
+          this.state = {
+            cache: {}
+          }
+        }
+
+        componentDidUpdate() {
+          if (!this.state.cache[this.props.course.id]) {
+            // fetch data from SPARQL endpoint
+            FETCH_SPARQL('getPollActivity', [this.props.course.id])
+              .then(json => {
+                const labels = [];
+                const data = [];
+                console.log(json);
+                json.results.bindings.forEach(bnd => {
+                  labels.push(bnd.question.value);
+                  data.push(bnd.votes.value);
+                });
+                
+                this.setState({
+                  cache: {
+                    ...this.state.cache,
+                    [this.props.course.id]: {labels, data},
+                  }
+                })
+              })
+          } else {
+            // if the data is present in the cache,
+            // display it on the screen!
+            const ctx = this.chartRef.current.getContext("2d");
+            const { labels, data } = this.state.cache[this.props.course.id]
+            new Chart(ctx, {
+              type: "bar",
+              data: {
+                labels,
+                datasets: [
+                  {
+                    data,
+                    backgroundColor: Array(labels.length).fill(this.props.course.color),
+                    borderWidth: 0
+                  }
+                ]
+              },
+              options: {
+                legend: {
+                  display: false,
+                },
+                tooltips: {
+                  display: false,
+                },
+                scales: {
+                  yAxes: [{
+                    display: true,
+                    ticks: {
+                      beginAtZero: true
+                    }
+                  }]
+                }
+              }
+            })
+          }
+        }
+        componentDidMount() {
+          this.componentDidUpdate();
+        }
+
+        hasData = () => this.state.cache[this.props.course.id] && this.state.cache[this.props.course.id].labels.length > 0
+
+        render() {
+          return (
+            <div style={{width: 400, height: 200, marginLeft: 'auto', marginRight: 'auto'}}>
+              <p>{this.hasData() ? Charts[this.props.chart].text : 'No data available to chart!'}</p>
+              <canvas style={{display: this.hasData() ? 'block' : 'none'}}id="chart" width="300" height="300" ref={this.chartRef}></canvas>
+            </div>
+          )
+        }
+      }
+
+      class CustomMetricChart extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.chartRef = React.createRef();
+
+          this.state = {
+            cache: {}
+          }
+        }
+
+        componentDidUpdate() {
+          if (!this.state.cache[this.props.course.id]) {
+            // fetch data from SPARQL endpoint
+            console.log(this.props.course.id)
+            FETCH_SPARQL('getActivityMetric', [this.props.course.id])
+              .then(json => {
+                const labels = [];
+                const data = [];
+                console.log(json);
+                json.results.bindings.forEach(bnd => {
+                  labels.push(bnd.firstName.value + " " + bnd.lastName.value);
+                  data.push(bnd.activity.value);
+                });
+
+                console.log('labels', labels)
+                console.log('data', data)
+                
+                this.setState({
+                  cache: {
+                    ...this.state.cache,
+                    [this.props.course.id]: {labels, data},
+                  }
+                })
+              })
+          } else {
+            const ctx = this.chartRef.current.getContext("2d");
+
+            const { labels, data } = this.state.cache[this.props.course.id];
+
+            new Chart(ctx, {
+              type: "horizontalBar",
+              data: {
+                labels,
+                datasets: [
+                  {
+                    data,
+                    backgroundColor: Array(labels.length).fill(this.props.course.color),
+                    borderWidth: 0,
+                  }
+                ]
+              },
+              options: {
+                legend: {
+                  display: false,
+                },
+                tooltips: {
+                  display: false,
+                },
+                scales: {
+                  yAxes: [{
+                    display: true,
+                    ticks: {
+                      beginAtZero: true
+                    }
+                  }],
+                  xAxes: [{
+                    display: true,
+                    ticks: {
+                      beginAtZero: true
+                    }
+                  }]
+                }
+              }
+            })
+          }
+        }
+
+        componentDidMount() {
+          this.componentDidUpdate();
+        }
+
+        render() {
+          return (
+            <div style={{width: 600, height: 300, marginLeft: 'auto', marginRight: 'auto'}}>
+              <p>{this.props.chart}</p>
+              <canvas id="chart" width="500" height="300" ref={this.chartRef}></canvas>
+            </div>
+          )
+        }
+      }
+
+      class ChartSpace extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+
+        render() {
+          const props = {
+            course: this.props.course,
+            chart: this.props.chart,
+          }
+
+          switch(this.props.chart) {
+            case "ATTENDANCE_PER_CLASS": 
+              return <AttendanceChart cacheKey={this.props.course + "#attendance"} {...props} />;
+            case "ACTIVITY_PER_POLL": 
+              return <PollActivityChart cacheKey={this.props.course + "#activity"} {...props} />;
+            case "RESULTS_PER_POLL": 
+              return <PollResultsChart cacheKey={this.props.course + "#results"} {...props} />;
+            case "ACTIVITY_METRIC": 
+              return <CustomMetricChart cacheKey={this.props.course + "#metric"} {...props} />;
+            default: return (<div>An error occurred!</div>);
+          }
+        }
+      }
+
+      class Course extends React.Component {
+        render() {
+          const color = this.props.color;
+          return (
+            <span
+              style={{display: 'block', backgroundColor: color, padding: 5, borderRadius: 5, border: '1px solid #eee'}}
+              key={this.props.name}
+              onClick={() => this.props.onClick(this.props.id)}
+            >{this.props.name}</span>
+          )
+        }
+      }
+
+      class CoursesPage extends React.Component {
+        constructor(props) {
+          super(props);
+
+          const activeCourse = (Object.keys(this.props.courses).length > 0) 
+                                ? Object.values(this.props.courses)[0].id
+                                : undefined;
+
+
+          this.state = {
+            activeCourse: activeCourse,
+          }
+        }
+
+        handleCourseClicked = courseId => {
+          this.setState({
+            activeCourse: courseId,
+          })
+        }
+
+        handleCycleCourseClicked = num => {
+          const courses = Object.keys(this.props.courses);
+          const currentIdx = courses.findIndex((v) => v === this.state.activeCourse);
+
+          const remainderIdx = (currentIdx + num) % courses.length 
+          const nextIdx = remainderIdx < 0 ? remainderIdx + courses.length : remainderIdx
+
+          const cycledCourse = courses[nextIdx]
+
+          this.setState({
+            activeCourse: cycledCourse
+          })
+        }
+
+        render() {
+          const activeCourse = this.props.courses[this.state.activeCourse];
+          const courses = Object.entries(this.props.courses).map(([id, {name, color}]) => { return {id, name, color}});
+          return (
+            <div>
+              { (this.state.activeCourse)
+                ? (
+                <>
+                <div style={{height: 50, width: '100%', padding: 20, paddingTop: 5, border: `1px solid ${activeCourse.color}`, backgroundColor: activeCourse.color}}>
+                  <span style={{float: 'right'}}>{this.props.teacher.name}</span>
+                  <div style={{clear: 'both', display: 'flex', justifyContent: 'space-between'}}>
+                    { (courses.length > 1)
+                      ? <button onClick={() => this.handleCycleCourseClicked(-1)}>{"<<<"}</button>
+                      : <div></div>
+                    }
+                    <h3 style={{margin: '0 20px'}}>{activeCourse.id} - {activeCourse.name}</h3>
+                    { (courses.length > 1)
+                    ? <button onClick={() => this.handleCycleCourseClicked(+1)}>{">>>"}</button>
+                    : <div></div>
+                    }
+                  </div>
+                </div>
+                <OverviewPage course={this.props.courses[this.state.activeCourse]} />
+                </>
+                ) : <div>This teacher has no courses!</div>
+              }
+            </div>
+          )
+        }
+      }
+
+      class TeacherSelectionPage extends React.Component {
+
+        constructor(props) {
+          super(props);
+
+          this.state = {
+            formTeacherId: "",
+            teachers: [],
+            bestBuddy: {},
+          }
+        }
+
+        handleInputTeacherId = e => this.setState({ formTeacherId: e.target.value })
+
+        handleSubmitTeacherId = () => this.props.onTeacherChosen(this.state.formTeacherId)
+
+        componentDidMount() {
+          FETCH_SPARQL('getAllTeachers')
+            .then(res => {
+              this.setState({
+                teachers: res.results.bindings.map(({firstName, lastName, id}) => {
+                  return {
+                    firstName: firstName.value,
+                    lastName: lastName.value,
+                    id: id.value,
+                  }
+                }
+              )
+            })});
+
+          FETCH_SPARQL('bestBuddies', [])
+            .then(json => {
+              const bnd = json.results.bindings[0];
+              console.log('bnd', bnd);
+              this.setState({
+                  bestBuddy: {
+                    student: bnd.studentFirstName.value + " " + bnd.studentLastName.value,
+                    teacher: bnd.teacherFirstName.value + " " + bnd.teacherLastName.value,
+                    encounters: bnd.encounters.value,
+                  }
+                })
+              Object.entries(json.results.bindings[0]).map(([key, {value}]) => {
+                console.log('buddies', bnd);
+                
+              })
+            })
+        }
+        
+        clickedTeacher = employeeId => {
+          this.props.onTeacherChosen(employeeId);
+        }
+
+        render() {
+          return (
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%'}}>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <h1 style={{marginBottom: 20}}>Enter your teacher ID</h1>
+                <input 
+                  style={{width: 400, marginRight: 16}}
+                  type="text" 
+                  value={this.state.formTeacherId}
+                  onChange={ this.handleInputTeacherId } />
+                <button
+                  style={{margin: '0 auto'}}
+                  onClick={this.handleSubmitTeacherId}
+                >Submit</button>
+                <h1>Or select one from the list</h1>
+                {this.state.teachers.map(teacher => {
+                  return (<button style={{width: '300px', textAlign: 'center', marginBottom:5}} key={teacher.id} onClick={() => this.clickedTeacher(teacher.id)}>
+                    {teacher.firstName} {teacher.lastName}
+                  </button>)
+                })}
+              </div>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '50px 0'}}>
+                <h1 style={{margin: 0}}>Best buddies</h1>
+                <p>With <b>{this.state.bestBuddy.encounters}</b> encounters!</p>
+
+                <h2>{this.state.bestBuddy.student}</h2>
+                <h2 style={{fontSize: 200, lineHeight: 0, margin: 50, color: 'darkRed'}}>&#10084;</h2>
+                <h2>{this.state.bestBuddy.teacher}</h2>
+              </div>
+            </div>
+          )
+          
+        }
+      }
+
+      ReactDOM.render(
+        <Hello/>,
+        document.getElementById('root'),
+      );
+  </script>
+  <a style="display: block; position: absolute; top: 0; left: 0; margin: 20px; margin-left: 30px; font-size: 50px" href="http://localhost:8081">&#127969;</a>
+</body>
+
+</html>
