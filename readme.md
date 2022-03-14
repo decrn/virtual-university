@@ -1,6 +1,6 @@
 # Virtual University
 
-Relevant artifacts can be found in the `data/` directory.
+Relevant artifacts can be found in the `data/` directory. f
 
 ## Contents
 
